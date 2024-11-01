@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Свое Место</title>
+</head>
+<body>
+<h1>Выберите дату и время</h1>
+<form action="/table_selection" method="get">
+    <input type="hidden" name="guest_count" value="{{ guest_count }}">
+        <label for="reservation_date">Дата бронирования:</label>
+    <input type="datetime-local" id="reservation_date" name="reservation_date" required>
+    <button type="submit">Дальше</button>
+</form>
+</body>
+</html>

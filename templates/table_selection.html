@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Свое Место</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .seating-area {
+            display: flex;
+            flex-wrap: wrap;
+            width: 600px; /* Adjust the width as needed */
+            margin: auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+        .table {
+            width: 100px; /* Width of the table */
+            height: 100px; /* Height of the table */
+            margin: 10px;
+            background-color: #3498db;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+        .table.selected {
+            background-color: #e74c3c;
+            border-color: #fff;
+        }
+        .table-number {
+            color: white;
+            font-size: 1.5em;
+        }
+        .chair {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: #2ecc71; /* Color of the chairs */
+            border-radius: 50%;
+        }
+        /* Position chairs around the table */
+        .chair:nth-child(1) { top: -10px; left: 40px; }
+        .chair:nth-child(2) { top: 40px; left: -10px; }
+        .chair:nth-child(3) { top: 40px; left: 90px; }
+        .chair:nth-child(4) { top: 90px; left: 40px; }
+    </style>
+</head>
+<body>
+    <h1>Выберите столик</h1>
+    <div class="seating-area">
+        <div class="table" id="table_1" onclick="selectTable(1)">
+            <div class="table-number">1</div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+        </div>
+        <div class="table" id="table_2" onclick="selectTable(2)">
+            <div class="table-number">2</div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+        </div>
+        <div class="table" id="table_3" onclick="selectTable(3)">
+            <div class="table-number">3</div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+            <div class="chair"></div>
+        </div>
+    </div>
+    <form action="/result" method="post" id="reservationForm" style="display: none;">
+        <input type="hidden" name="guest_count" value="{{ guest_count }}">
+        <input type="hidden" name="reservation_date" value="{{ reservation_date }}">
+        <input type="hidden" id="selected_table" name="table_number" value="">
+        <button type="submit">Забронировать</button>
+    </form>
+
+    <script>
+        function selectTable(tableId) {
+            // Deselect all tables
+            const tables = document.querySelectorAll('.table');
+            tables.forEach(table => {
+                table.classList.remove('selected');
+            });
+
+            // Select the clicked table
+            const selectedTable = document.getElementById(`table_${tableId}`);
+            selectedTable.classList.add('selected');
+            document.getElementById('selected_table').value = tableId;
+            document.getElementById('reservationForm').style.display = 'block';
+
+   }
+    </script>
+</body>
+</html>
