@@ -3,11 +3,22 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
-from .database import engine
-from .models import Base
-from .routes import router
+from database import engine, create_table, delete_tables
+from models import Base
+from routes import router
+from contextlib import asynccontextmanager
 
-app = FastAPI()
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    await delete_tables()
+    print("База очищена")
+    await create_table()
+    print("База готова")
+    yield
+    print("Выключение")
+
+app = FastAPI(lifespan=lifespan)
 templates = Jinja2Templates(directory="templates")
 
 app.add_middleware(

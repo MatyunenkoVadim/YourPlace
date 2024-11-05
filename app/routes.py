@@ -4,8 +4,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
-from .database import get_async_session
-from .models import Reservation
+from database import get_async_session
+from models import Reservation
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
