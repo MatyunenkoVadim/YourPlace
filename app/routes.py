@@ -4,8 +4,10 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
-from database import get_async_session
-from models import Reservation
+
+from repository import ReservationRepository
+from schemas import ReservationCreate
+from database import async_session
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -37,7 +39,7 @@ async def select_table(request: Request, guest_count: int, reservation_date: str
 
 
 @router.post("/result", response_class=HTMLResponse)
-async def reserve_table(request: Request, session: AsyncSession = Depends(get_async_session)):
+async def reserve_table(request: Request):
     form_data = await request.form()
     guest_count = int(form_data.get("guest_count"))
     reservation_date_str = form_data.get("reservation_date")
@@ -48,15 +50,12 @@ async def reserve_table(request: Request, session: AsyncSession = Depends(get_as
     except ValueError:
         return HTMLResponse(content="Invalid reservation date format.", status_code=400)
 
-    new_reservation = Reservation(
+    new_reservation = ReservationCreate(
         guest_count=guest_count,
         reservation_date=reservation_date,
         table_number=table_number
     )
-
-    session.add(new_reservation)
-    await session.commit()
-    await session.refresh(new_reservation)
+    reservation_id = await ReservationRepository.add_one(new_reservation)
 
     print(f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}")
 
