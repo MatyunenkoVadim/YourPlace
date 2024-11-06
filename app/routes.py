@@ -4,9 +4,8 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from repository import ReservationRepository
-from schemas import ReservationCreate
-from database import async_session
+from .repository import ReservationRepository
+from .schemas import ReservationCreate
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -54,7 +53,7 @@ async def reserve_table(request: Request):
         reservation_date=reservation_date,
         table_number=table_number
     )
-    reservation_id = await ReservationRepository.add_one(new_reservation)
+    await ReservationRepository.add_one(new_reservation)
 
     print(f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}")
 
@@ -64,4 +63,4 @@ async def reserve_table(request: Request):
         "reservation_date": reservation_date.strftime("%Y-%m-%d %H:%M:%S"),
         "table_number": table_number
     })
-
+  

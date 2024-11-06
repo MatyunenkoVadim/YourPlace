@@ -1,11 +1,13 @@
-from fastapi import FastAPI, Form
+from contextlib import asynccontextmanager
+
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
-from database import engine, create_table, delete_tables
-from routes import router
-from contextlib import asynccontextmanager
+
+from .database import create_table, delete_tables
+from .routes import router
 
 
 @asynccontextmanager
