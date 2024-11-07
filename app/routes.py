@@ -4,8 +4,8 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from .repository import ReservationRepository
-from .schemas import ReservationCreate
+from app.repository import ReservationRepository
+from app.schemas import ReservationCreate
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")

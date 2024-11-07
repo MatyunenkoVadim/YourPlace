@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
-from .schemas import ReservationCreate
-from .database import async_session, ReservationsTable
+from app.schemas import ReservationCreate
+from app.database import async_session, ReservationsTable
 
 
 class ReservationRepository:
