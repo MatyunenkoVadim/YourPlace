@@ -6,8 +6,8 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from .database import create_table, delete_tables
-from .routes import router
+from app.database import create_table, delete_tables
+from app.routes import router
 
 
 @asynccontextmanager
