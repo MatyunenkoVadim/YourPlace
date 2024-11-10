@@ -19,6 +19,17 @@ class ReservationResponse(BaseModel):
 
 class User(BaseModel):
     username: str
-    email: str | None = None
+    phone: str | None = None
     full_name: str | None = None
-    disabled: bool | None = None
+
+class UserInDB(User):
+    id: int
+    hashed_password: str
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+
+class TokenData(BaseModel):
+    username: str | None = None

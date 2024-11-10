@@ -39,6 +39,15 @@ class TablesTable(Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     number_seats: Mapped[int]
 
+class UsersTable(Model):
+    __tablename__ = "users"
+
+    id: Mapped[int] = mapped_column(primary_key=True)
+    username: Mapped[str]
+    phone: Mapped[str]
+    fullname: Mapped[str]
+    password: Mapped[str]
+
 
 async def create_table():
     async with engine.begin() as conn:
