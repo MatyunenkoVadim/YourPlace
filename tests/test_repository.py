@@ -65,3 +65,41 @@ class TestReservationRepository(unittest.TestCase):
         self.assertEqual(len(reservations), 2)
         self.assertIn(reservation1.model_dump(), [r.model_dump() for r in reservations])
         self.assertIn(reservation2.model_dump(), [r.model_dump() for r in reservations])
+
+    # Проверяет, что метод add_one выдает ошибку при некорректном формате даты.
+    @patch('app.database.engine', new_callable=lambda: self.engine)
+    async def test_add_one_invalid_date(self, mocked_engine):
+        reservation = ReservationCreate(
+            guest_count=2,
+            reservation_date="2024-01-01T12:00",  # Некорректный формат даты
+            table_number="1"
+        )
+        with self.assertRaises(Exception) as context:
+            await ReservationRepository.add_one(reservation)
+        self.assertTrue('invalid date format' in str(context.exception))
+
+    # Проверяет, что метод find_all возвращает пустой список, если в таблице нет записей.
+    @patch('app.database.engine', new_callable=lambda: self.engine)
+    async def test_find_all_empty_table(self, mocked_engine):
+        await create_table()
+        reservations = await ReservationRepository.find_all()
+        self.assertEqual(reservations, [])
+
+    # Проверяет, что метод add_one не добавляет новое бронирование, если столик уже забронирован на это время.
+    @patch('app.database.engine', new_callable=lambda: self.engine)
+    async def test_add_one_existing_table(self, mocked_engine):
+        await create_table()
+
+        await ReservationRepository.add_one(ReservationCreate(
+            guest_count=2,
+            reservation_date=datetime(2024, 1, 1, 12, 0, 0),
+            table_number="1"
+        ))
+
+        with self.assertRaises(Exception) as context:
+            await ReservationRepository.add_one(ReservationCreate(
+                guest_count=2,
+                reservation_date=datetime(2024, 1, 1, 12, 0, 0),
+                table_number="1"
+            ))
+        self.assertTrue('table is already booked' in str(context.exception))
