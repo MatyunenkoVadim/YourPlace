@@ -5,9 +5,11 @@ from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
+import uvicorn
 
 from app.database import create_table, delete_tables
-from app.routes import router
+from routes.reservation import router as router_reservation
+from routes.users import router as router_users
 
 
 @asynccontextmanager
@@ -36,4 +38,8 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-app.include_router(router)
+app.include_router(router_reservation)
+app.include_router(router_users)
+
+
+
