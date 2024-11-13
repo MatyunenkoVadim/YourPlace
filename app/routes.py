@@ -18,7 +18,9 @@ async def select_guests(request: Request):
 
 @router.get("/datetime", response_class=HTMLResponse)
 async def select_datetime(request: Request, guest_count: int):
-    return templates.TemplateResponse("datetime.html", {"request": request, "guest_count": guest_count})
+    return templates.TemplateResponse(
+        "datetime.html", {"request": request, "guest_count": guest_count}
+    )
 
 
 @router.get("/table_selection", response_class=HTMLResponse)
@@ -29,11 +31,14 @@ async def select_table(request: Request, guest_count: int, reservation_date: str
     except ValueError:
         return HTMLResponse(content="Invalid date format.", status_code=400)
 
-    return templates.TemplateResponse("table_selection.html", {
-        "request": request,
-        "guest_count": guest_count,
-        "reservation_date": reservation_date
-    })
+    return templates.TemplateResponse(
+        "table_selection.html",
+        {
+            "request": request,
+            "guest_count": guest_count,
+            "reservation_date": reservation_date,
+        },
+    )
 
 
 @router.post("/result", response_class=HTMLResponse)
@@ -51,16 +56,20 @@ async def reserve_table(request: Request):
     new_reservation = ReservationCreate(
         guest_count=guest_count,
         reservation_date=reservation_date,
-        table_number=table_number
+        table_number=table_number,
     )
     await ReservationRepository.add_one(new_reservation)
 
-    print(f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}")
+    print(
+        f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}"
+    )
 
-    return templates.TemplateResponse("result.html", {
-        "request": request,
-        "guest_count": guest_count,
-        "reservation_date": reservation_date.strftime("%Y-%m-%d %H:%M:%S"),
-        "table_number": table_number
-    })
-  
+    return templates.TemplateResponse(
+        "result.html",
+        {
+            "request": request,
+            "guest_count": guest_count,
+            "reservation_date": reservation_date.strftime("%Y-%m-%d %H:%M:%S"),
+            "table_number": table_number,
+        },
+    )

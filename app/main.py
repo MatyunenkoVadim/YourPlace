@@ -19,6 +19,7 @@ async def lifespan(app: FastAPI):
     yield
     print("Выключение")
 
+
 app = FastAPI(lifespan=lifespan)
 templates = Jinja2Templates(directory="templates")
 
