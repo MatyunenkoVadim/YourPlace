@@ -4,7 +4,7 @@ from unittest.mock import patch
 
 from app.repository import ReservationRepository
 from app.schemas import ReservationCreate
-from app.database import engine, ReservationsTable, async_session
+from app.database import engine, ReservationsTable, async_session, create_table
 from sqlalchemy import create_engine, text, select
 from datetime import datetime
 
@@ -13,6 +13,7 @@ class TestReservationRepository(unittest.TestCase):
         self.engine = create_engine("sqlite:///test.db")
         self.loop = asyncio.new_event_loop()
         asyncio.set_event_loop(self.loop)
+        self.loop.run_until_complete(create_table())
 
     def tearDown(self):
         self.loop.run_until_complete(self.delete_reservations())
@@ -23,6 +24,7 @@ class TestReservationRepository(unittest.TestCase):
             await conn.execute(text("DELETE FROM reservation"))
             await conn.commit()
 
+    # Проверяет корректность данных при добавлении бронирования
     @patch('app.database.engine', new_callable=lambda: self.engine)
     async def test_add_one(self, mocked_engine):
         reservation = ReservationCreate(
@@ -33,7 +35,6 @@ class TestReservationRepository(unittest.TestCase):
 
         reservation_id = await ReservationRepository.add_one(reservation)
 
-        # Проверка наличия бронирования
         async with async_session() as session:
             result = await session.execute(select(ReservationsTable).where(ReservationsTable.id == reservation_id))
             reservation_from_db = result.scalar_one_or_none()
@@ -42,6 +43,7 @@ class TestReservationRepository(unittest.TestCase):
             self.assertEqual(reservation_from_db.reservation_date, reservation.reservation_date)
             self.assertEqual(reservation_from_db.table_number, reservation.table_number)
 
+    #Проверяет, что метод find_all возвращает список всех бронирований.
     @patch('app.database.engine', new_callable=lambda: self.engine)
     async def test_find_all(self, mocked_engine):
         reservation1 = ReservationCreate(
