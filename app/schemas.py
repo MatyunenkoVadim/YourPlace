@@ -1,3 +1,6 @@
+from email.policy import strict
+
+from dulwich.config import ConfigDict
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -25,6 +28,12 @@ class User(BaseModel):
 class UserInDB(User):
     id: int
     hashed_password: str
+
+class UserAuth(User):
+    model_config = ConfigDict()
+
+    hashed_password: bytes
+    active: bool = True
 
 class Token(BaseModel):
     access_token: str
