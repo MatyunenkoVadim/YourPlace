@@ -1,8 +1,6 @@
-from datetime import timedelta
+from datetime import timedelta, datetime
 
 import jwt
-from win32ctypes.pywin32.pywintypes import datetime
-
 from core.config import settings
 
 

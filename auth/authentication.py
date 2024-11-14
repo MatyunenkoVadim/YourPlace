@@ -1,9 +1,14 @@
 from datetime import datetime, timedelta, timezone
 from typing import Annotated
-from fastapi import Form, HTTPException, status
+from fastapi import Form, HTTPException, status, Depends
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
+from jwt.exceptions import InvalidTokenError
 
 from app.schemas import UserAuth
 from secure import hashed as auth_password
+from auth import utils as auth_utils
+
+http_bearer = HTTPBearer()
 
 mark = UserAuth(
     username="mark",
@@ -46,3 +51,39 @@ def authenticate_user(
             detail="user inactive",
         )
     return user
+
+def get_current_token_payload_user(
+    credentials: HTTPAuthorizationCredentials = Depends(http_bearer),
+):
+    token = credentials.credentials
+    try:
+        payload = auth_utils.decode_jwt(
+            token=token,
+        )
+    except InvalidTokenError:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="token invalid",
+        )
+    return payload
+
+def get_current_auth_user(
+    payload: dict = Depends(get_current_token_payload_user),
+) -> UserAuth:
+    username: str | None = payload.get("sub")
+    if user := users_db.get(username):
+        return user
+    raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="token invalid",
+    )
+
+def get_current_auth_active_user(
+    user: UserAuth = Depends(get_current_auth_user),
+):
+    if user.active:
+        return user
+    raise HTTPException(
+        status_code=status.HTTP_403_FORBIDDEN,
+        detail="user inactive",
+    )
