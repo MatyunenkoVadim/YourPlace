@@ -1,15 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Свое Место</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-<h1>Выберите кол-во гостей</h1>
-<form action="/datetime" method="get">
-    <label for="guest_count">Кол-во гостей:</label>
-    <input type="number" id="guest_count" name="guest_count" required>
-    <button type="submit">Дальше</button>
-</form>
+
+{% include 'header.html' %}
+
+<div class="content">
+    <h1>Выберите кол-во гостей</h1>
+    <form action="/datetime" method="get">
+        <div class="guest-count-container">
+            <div class="guest-option" data-value="1">1</div>
+            <div class="guest-option" data-value="2">2</div>
+            <div class="guest-option" data-value="3">3</div>
+            <div class="guest-option" data-value="4">4</div>
+            <div class="guest-option" data-value="5">5</div>
+            <div class="guest-option" data-value="6">6</div>
+        </div>
+        <input type="hidden" id="guest_count" name="guest_count" required>
+        <button type="submit" class="button" id="nextButton" disabled>Дальше</button>
+    </form>
+</div>
+
+<script>
+    const guestOptions = document.querySelectorAll('.guest-option');
+    const guestCountInput = document.getElementById('guest_count');
+    const nextButton = document.getElementById('nextButton');
+
+    guestOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            guestOptions.forEach(opt => opt.classList.remove('selected'));
+            option.classList.add('selected');
+            guestCountInput.value = option.getAttribute('data-value');
+            nextButton.disabled = false;
+        });
+    });
+</script>
+
 </body>
 </html>

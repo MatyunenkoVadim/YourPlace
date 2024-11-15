@@ -1,23 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <title>Свое Место</title>
+    <link rel="stylesheet" href="/static/style.css">
     <style>
+        /* Временные столики и стулья, потом заменим на готовые нашим дизигнером варианты*/
         body {
             font-family: Arial, sans-serif;
         }
         .seating-area {
             display: flex;
             flex-wrap: wrap;
-            width: 600px; /* Adjust the width as needed */
+            width: 600px;
             margin: auto;
             border: 1px solid #ccc;
             padding: 20px;
         }
         .table {
-            width: 100px; /* Width of the table */
-            height: 100px; /* Height of the table */
+            width: 100px;
+            height: 100px;
             margin: 10px;
             background-color: #3498db;
             border: 2px solid transparent;
@@ -40,10 +42,9 @@
             position: absolute;
             width: 20px;
             height: 20px;
-            background-color: #2ecc71; /* Color of the chairs */
+            background-color: #2ecc71;
             border-radius: 50%;
         }
-        /* Position chairs around the table */
         .chair:nth-child(1) { top: -10px; left: 40px; }
         .chair:nth-child(2) { top: 40px; left: -10px; }
         .chair:nth-child(3) { top: 40px; left: 90px; }
@@ -51,6 +52,10 @@
     </style>
 </head>
 <body>
+
+{% include 'header.html' %}
+
+<div class="content">
     <h1>Выберите столик</h1>
     <div class="seating-area">
         <div class="table" id="table_1" onclick="selectTable(1)">
@@ -79,24 +84,26 @@
         <input type="hidden" name="guest_count" value="{{ guest_count }}">
         <input type="hidden" name="reservation_date" value="{{ reservation_date }}">
         <input type="hidden" id="selected_table" name="table_number" value="">
-        <button type="submit">Забронировать</button>
+        <button type="submit" class="button">Забронировать</button>
     </form>
+</div>
 
-    <script>
-        function selectTable(tableId) {
-            // Deselect all tables
-            const tables = document.querySelectorAll('.table');
-            tables.forEach(table => {
-                table.classList.remove('selected');
-            });
+<script>
+    function selectTable(tableId) {
+        // Deselect all tables
+        const tables = document.querySelectorAll('.table');
+        tables.forEach(table => {
+            table.classList.remove('selected');
+        });
 
-            // Select the clicked table
-            const selectedTable = document.getElementById(`table_${tableId}`);
-            selectedTable.classList.add('selected');
-            document.getElementById('selected_table').value = tableId;
-            document.getElementById('reservationForm').style.display = 'block';
+        // Select the clicked table
+        const selectedTable = document.getElementById(`table_${tableId}`);
+        selectedTable.classList.add('selected');
+        document.getElementById('selected_table').value = tableId;
+        document.getElementById('reservationForm').style.display = 'block';
 
-   }
-    </script>
+    }
+</script>
+
 </body>
 </html>
