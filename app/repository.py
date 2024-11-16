@@ -1,7 +1,7 @@
 from sqlalchemy import select
 
 from app.schemas import ReservationCreate
-from app.database import async_session, ReservationsTable, UsersTable
+from core.models.model import async_session, ReservationsTable, UsersTable
 
 
 class ReservationRepository:

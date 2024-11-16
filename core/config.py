@@ -12,7 +12,7 @@ class AuthJWT(BaseModel):
     access_token_expire_minutes: int = 5
 
 class Settings(BaseSettings):
-    db_url: str = "sqlite+aiosqlite:///YourPlace.db"
+    db_url: str = "postgresql+asyncpg://postgres:farveh8@localhost:5432/YourPlace"
 
     auth_jwt: AuthJWT = AuthJWT()
 
