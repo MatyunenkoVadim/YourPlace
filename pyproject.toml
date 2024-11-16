@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "yourplace"
+version = "0.1.0"
+description = ""
+authors = ["efremdana <efremenkodana@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.115.5"
+uvicorn = {extras = ["standard"], version = "^0.32.0"}
+jinja2 = "^3.1.4"
+sqlalchemy = {extras = ["asyncio"], version = "^2.0.36"}
+bcrypt = "^4.2.0"
+pyjwt = {extras = ["crypto"], version = "^2.9.0"}
+alembic = "^1.14.0"
+pydantic-settings = "^2.6.1"
+python-multipart = "^0.0.17"
+asyncpg = "^0.30.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
