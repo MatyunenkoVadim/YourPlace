@@ -6,6 +6,7 @@ from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
+import uvicorn
 
 from app.database import create_table, delete_tables
 from routes.reservation import router as router_reservation
