@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sqlalchemy.orm import Mapped
 
-from core.models.model import Model
+from core.models import Model
 
 
 class ReservationsTable(Model):

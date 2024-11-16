@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped
 
-from core.models.model import Model
+from core.models import Model
 
 
 class VisitorsTable(Model):

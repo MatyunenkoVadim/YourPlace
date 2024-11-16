@@ -6,8 +6,8 @@ __all__ = (
         "UsersTable",
 )
 
-from model import Model
-from users import UsersTable
-from tables import TablesTable
-from reservations import ReservationsTable
-from visitors import VisitorsTable
+from .model import Model
+from .users import UsersTable
+from .tables import TablesTable
+from .reservations import ReservationsTable
+from .visitors import VisitorsTable
