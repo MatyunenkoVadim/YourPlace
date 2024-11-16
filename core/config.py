@@ -13,6 +13,7 @@ class AuthJWT(BaseModel):
 
 class Settings(BaseSettings):
     db_url: str = "postgresql+asyncpg://postgres:farveh8@localhost:5432/YourPlace"
+    db_echo: bool = False
 
     auth_jwt: AuthJWT = AuthJWT()
 
