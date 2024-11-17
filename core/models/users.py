@@ -1,12 +1,12 @@
-from sqlalchemy.orm import Mapped
+from sqlalchemy.orm import Mapped, mapped_column
 
-from core.models import Model
+from .model import Model
 
 
-class UsersTable(Model):
+class User(Model):
     __tablename__ = "users"
 
-    username: Mapped[str]
-    phone: Mapped[str]
-    fullname: Mapped[str]
+    username: Mapped[str] = mapped_column(unique=True)
+    phone: Mapped[str] = mapped_column(unique=True)
+    fullname: Mapped[str | None]
     password: Mapped[str]

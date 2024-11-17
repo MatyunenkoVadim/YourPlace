@@ -1,10 +1,17 @@
-from sqlalchemy.orm import Mapped
+from typing import TYPE_CHECKING
 
-from core.models import Model
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from .model import Model
+
+if TYPE_CHECKING:
+    from .reservations import Reservation
 
 
-class VisitorsTable(Model):
+class Visitor(Model):
     __tablename__ = "visitors"
 
     name: Mapped[str]
-    phone: Mapped[str]
+    phone: Mapped[str] = mapped_column(unique=True)
+
+    reservations: Mapped[list["Reservation"]] = relationship(back_populates="visitor")

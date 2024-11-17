@@ -1,9 +1,16 @@
-from sqlalchemy.orm import Mapped
+from typing import TYPE_CHECKING
 
-from core.models import Model
+from sqlalchemy.orm import Mapped, relationship
+
+from .model import Model
+
+if TYPE_CHECKING:
+    from .reservations import Reservation
 
 
-class TablesTable(Model):
+class Table(Model):
     __tablename__ = "tables"
 
     number_seats: Mapped[int]
+
+    reservation: Mapped["Reservation"] = relationship(back_populates="table")
