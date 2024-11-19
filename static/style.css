@@ -115,14 +115,124 @@ body {
     color: #FFFDEA;
 }
 
-input[type="datetime-local"] {
-    background-color: #FFFDEA;
-    font-size: 1em;
+/* Общие стили для календаря */
+.calendar-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFFDEA;
     border: 2px solid #2C1107;
-    border-radius: 5px;
-    padding: 5px;
-    width: 210px;
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+    margin: 20px auto;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.calendar-nav {
+    background: none;
+    border: none;
+    color: #2C1107;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.calendar-nav:hover {
+    transform: scale(1.2);
+}
+
+.calendar-month {
+    font-size: 18px;
+    font-weight: bold;
+    color: #2C1107;
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.calendar-weekday,
+.calendar-day {
     text-align: center;
+    padding: 5px;
+    border-radius: 4px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+/* Стили для дней недели */
+.calendar-weekday {
+    background: none;
+    color: #000000;
+    font-size: 12px;
+    opacity: 0.29;
+}
+
+/* Стили для дней */
+.calendar-day {
+    background: #FFFDEA;
+    color: #000000;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: background 0.2s, border 0.2s;
+    opacity: 0,29;
+}
+
+.calendar-day:hover {
+    background: #FFFDEA;
+    border: 1px solid #2C1107;
+}
+
+.calendar-day.today {
+    border: 1px solid #2C1107;
+}
+
+.calendar-day.selected {
+    background: #2C1107;
+    color: #FFFDEA;
+    border: 1px solid #2C1107;
+}
+
+.calendar-day:active {
+    background: #2C1107;
+    color: #FFFDEA;
+    border: 1px solid #2C1107;
+}
+
+/* Предотвращаем изменение размеров при наведении на дни */
+.calendar-day,
+.calendar-day:hover,
+.calendar-day.selected,
+.calendar-day:active {
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+/* Общий стиль для времени выбора */
+#time-selection {
     margin-top: 10px;
-    transition: border-color 0.3s ease;
+    padding: 5px;
+    border: 2px solid #2C1107;
+    border-radius: 4px;
+    background: #FFFDEA;
+    font-size: 14px;
+    color: #2C1107;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Всплывающий эффект при наведении на время */
+#time-selection:hover {
+    border-color: #2C1107;
 }
