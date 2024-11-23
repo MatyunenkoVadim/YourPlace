@@ -1,14 +1,12 @@
-from datetime import datetime, timedelta
-from typing import Annotated
+from datetime import datetime
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordRequestForm
+from fastapi import APIRouter
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from app.repository import ReservationRepository
-from app.schemas import ReservationCreate, Token, User
+from api_v1.reservations.db_controller import ReservationRepository
+from api_v1.reservations.schemas import ReservationCreate
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")

@@ -9,6 +9,7 @@ from starlette.templating import Jinja2Templates
 
 from routes.reservation import router as router_reservation
 from routes.users import router as router_users
+from routes.api_v1 import router as router_database
 
 
 @asynccontextmanager
@@ -21,7 +22,9 @@ async def lifespan(app: FastAPI):
     # yield
     # print("Выключение")
 
-app = FastAPI(lifespan=lifespan)
+app = FastAPI(
+    # lifespan=lifespan,
+)
 templates = Jinja2Templates(directory="templates")
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
@@ -41,6 +44,7 @@ async def read_index(request: Request):
 
 app.include_router(router_reservation)
 app.include_router(router_users)
+app.include_router(router_database)
 
 
 
