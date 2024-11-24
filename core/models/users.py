@@ -10,3 +10,4 @@ class User(Model):
     phone: Mapped[str] = mapped_column(unique=True)
     fullname: Mapped[str | None]
     password: Mapped[str]
+    active: Mapped[bool] = mapped_column(default=True)
