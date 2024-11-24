@@ -3,7 +3,8 @@ from fastapi import (
     Depends,
 )
 
-from app.schemas import UserAuth, Token
+from app.schemas import Token
+from api_v1.users.schemas import UserAuth
 from auth.authentication import (
     authenticate_user,
     get_current_auth_active_user,

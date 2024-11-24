@@ -2,10 +2,10 @@ from fastapi import APIRouter, HTTPException, status, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from core.models import db_helper
-from api_v1.reservations.db_controller import ReservationRepository
-from api_v1.reservations.schemas import ReservationCreate, ReservationResponse
+from .db_controller import ReservationRepository
+from .schemas import ReservationCreate, ReservationResponse
 
-router = APIRouter(prefix="/api/v1/database")
+router = APIRouter()
 
 
 @router.get("", response_model=list[ReservationResponse])

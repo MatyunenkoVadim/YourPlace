@@ -2,7 +2,7 @@ from fastapi import Form, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
 
-from app.schemas import UserAuth
+from api_v1.users.schemas import UserAuth
 from secure import hashed as auth_password
 from auth import utils as auth_utils
 

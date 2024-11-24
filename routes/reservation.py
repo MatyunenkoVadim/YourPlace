@@ -1,12 +1,14 @@
 from datetime import datetime
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
+from sqlalchemy.ext.asyncio import AsyncSession
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
 from starlette.templating import Jinja2Templates
 
-from api_v1.reservations.db_controller import ReservationRepository
 from api_v1.reservations.schemas import ReservationCreate
+from api_v1.reservations.db_controller import ReservationRepository
+from core.models import db_helper
 
 router = APIRouter()
 templates = Jinja2Templates(directory="templates")
@@ -38,7 +40,10 @@ async def select_table(request: Request, guest_count: int, reservation_date: str
 
 
 @router.post("/result", response_class=HTMLResponse)
-async def reserve_table(request: Request):
+async def reserve_table(
+        request: Request,
+        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+):
     form_data = await request.form()
     guest_count = int(form_data.get("guest_count"))
     reservation_date_str = form_data.get("reservation_date")
@@ -54,7 +59,7 @@ async def reserve_table(request: Request):
         reservation_date=reservation_date,
         table_number=table_number
     )
-    await ReservationRepository.add_one_reservation(new_reservation)
+    await ReservationRepository.add_one_reservation(session=session, data=new_reservation)
 
     print(f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}")
 
@@ -64,4 +69,3 @@ async def reserve_table(request: Request):
         "reservation_date": reservation_date.strftime("%Y-%m-%d %H:%M:%S"),
         "table_number": table_number
     })
-  

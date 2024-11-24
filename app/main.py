@@ -7,9 +7,9 @@ from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
-from routes.reservation import router as router_reservation
+from core.config import settings
 from routes.users import router as router_users
-from routes.api_v1 import router as router_database
+from api_v1 import router as router_api_vi
 
 
 @asynccontextmanager
@@ -42,9 +42,8 @@ async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
 
-app.include_router(router_reservation)
 app.include_router(router_users)
-app.include_router(router_database)
+app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
 
 
 
