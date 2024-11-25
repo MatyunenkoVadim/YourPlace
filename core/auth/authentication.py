@@ -3,8 +3,8 @@ from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
 
 from api_v1.users.schemas import UserAuth
-from secure import hashed as auth_password
-from auth import utils as auth_utils
+from core.secure import hashed as auth_password
+from core.auth import utils as auth_utils
 
 http_bearer = HTTPBearer()
 

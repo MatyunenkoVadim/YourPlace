@@ -3,14 +3,13 @@ from fastapi import (
     Depends,
 )
 
-from app.schemas import Token
+from core.auth.schemas import Token
 from api_v1.users.schemas import UserAuth
-from auth.authentication import (
+from core.auth.authentication import (
     authenticate_user,
     get_current_auth_active_user,
-    get_current_token_payload_user
+    get_current_token_payload_user, utils as auth_utils
 )
-from auth import utils as auth_utils
 
 router = APIRouter(prefix="/users")
 
