@@ -10,6 +10,7 @@ from starlette.templating import Jinja2Templates
 from core.config import settings
 from routes.users import router as router_users
 from api_v1 import router as router_api_vi
+from routes.reservation import router as router_reservation
 
 
 @asynccontextmanager
@@ -44,6 +45,4 @@ async def read_index(request: Request):
 
 app.include_router(router_users)
 app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
-
-
-
+app.include_router(router_reservation)
