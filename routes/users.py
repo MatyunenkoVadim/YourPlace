@@ -8,8 +8,9 @@ from api_v1.users.schemas import UserAuth
 from core.auth.authentication import (
     authenticate_user,
     get_current_auth_active_user,
-    get_current_token_payload_user, utils as auth_utils
+    get_current_token_payload_user,
 )
+from core.auth import utils as auth_utils
 
 router = APIRouter(prefix="/users")
 

@@ -1,4 +1,4 @@
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class User(BaseModel):
@@ -6,7 +6,7 @@ class User(BaseModel):
 
     username: str
     phone: str | None = None
-    full_name: str | None = None
+    fullname: str | None = None
 
 
 class UserInDB(User):
@@ -16,5 +16,5 @@ class UserInDB(User):
 
 
 class UserAuth(User):
-    hashed_password: bytes
+    hashed_password: bytes = Field(..., alias="password")
     active: bool = True
