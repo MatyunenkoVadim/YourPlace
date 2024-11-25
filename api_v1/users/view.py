@@ -5,7 +5,7 @@ from core.models import db_helper
 from .db_controller import UsersRepository
 from .schemas import User, UserAuth
 
-router = APIRouter()
+router = APIRouter(tags=["User"])
 
 
 @router.get("", response_model=list[User])

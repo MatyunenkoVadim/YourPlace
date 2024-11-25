@@ -11,7 +11,7 @@ from api_v1.reservations.db_controller import ReservationRepository
 from core.models import db_helper
 
 router = APIRouter()
-templates = Jinja2Templates(directory="templates")
+templates = Jinja2Templates(directory="resources/templates")
 
 
 @router.get("/guests", response_class=HTMLResponse)

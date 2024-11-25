@@ -5,7 +5,7 @@ from core.models import db_helper
 from .db_controller import ReservationRepository
 from .schemas import ReservationCreate, ReservationResponse
 
-router = APIRouter()
+router = APIRouter(tags=["Reservation"])
 
 
 @router.get("", response_model=list[ReservationResponse])

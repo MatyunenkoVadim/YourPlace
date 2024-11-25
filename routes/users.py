@@ -12,7 +12,7 @@ from core.auth.authentication import (
 )
 from core.auth import utils as auth_utils
 
-router = APIRouter(prefix="/users")
+router = APIRouter(prefix="/users", tags=["Authorization"])
 
 @router.post("/login", response_model=Token)
 def auth_user_issue_jwt(
