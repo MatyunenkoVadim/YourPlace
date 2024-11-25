@@ -27,7 +27,7 @@ app = FastAPI(
     # lifespan=lifespan,
 )
 templates = Jinja2Templates(directory="resources/templates")
-app.mount("/resources/static", StaticFiles(directory="resources/static"), name="static")
+app.mount("/static", StaticFiles(directory="resources/static"), name="static")
 
 app.add_middleware(
     CORSMiddleware,
