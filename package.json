@@ -4,7 +4,7 @@
   "description": "Проект по программной инженерии, который, надеюсь перерастёт во что-то большее",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./input.css -o ./static/style.css --minify"
+    "build:css": "npx tailwindcss -i ./input.css -o ./resources/static/style.css --minify"
   },
   "keywords": [],
   "author": "",
