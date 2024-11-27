@@ -1,13 +1,10 @@
 from fastapi import (
     APIRouter,
     Depends,
-    Form,
-    HTTPException,
-    status,
 )
 
 from core.auth.schemas import Token
-from api_v1.users.schemas import UserAuth
+from api_v1.users.schemas import UserAuth, UserRegister
 from core.auth.authentication import (
     authenticate_user,
     get_current_auth_active_user,
@@ -47,7 +44,7 @@ def auth_user_check_self_info(
 
 @router.post("/register", response_model=Token)
 async def auth_user_register(
-        user: UserAuth = Depends(register_user),
+        user: UserRegister = Depends(register_user),
 ):
     jwt_payload = {
         "sub": user.username,

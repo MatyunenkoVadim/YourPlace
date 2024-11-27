@@ -1,11 +1,11 @@
-from sqlalchemy import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy.exc import IntegrityError
 
 from fastapi import Form, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
 
-from api_v1.users.schemas import UserAuth
+from api_v1.users.schemas import UserAuth, UserRegister
 from core.secure import hashed as auth_password
 from core.auth import utils as auth_utils
 from core.models.db_helper import db_helper
@@ -110,7 +110,7 @@ async def register_user(
         phone: str = Form(None),
         fullname: str = Form(None),
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
-) -> UserAuth:
+) -> UserRegister:
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
     user_auth = UserAuth(
@@ -122,7 +122,7 @@ async def register_user(
 
     try:
         await UsersRepository.create_new_user(session=session, user_auth=user_auth)
-        return user_auth
+        return UserRegister(**user_auth.model_dump())
     except IntegrityError as e:
         await session.rollback()
         if "unique constraint" in str(e.orig).lower():

@@ -18,3 +18,7 @@ class UserInDB(User):
 class UserAuth(User):
     hashed_password: bytes = Field(..., alias="password")
     active: bool = True
+
+class UserRegister(BaseModel):
+    username: str
+    password: str
