@@ -1,6 +1,9 @@
 from fastapi import (
     APIRouter,
     Depends,
+    Form,
+    HTTPException,
+    status,
 )
 
 from core.auth.schemas import Token
@@ -9,13 +12,14 @@ from core.auth.authentication import (
     authenticate_user,
     get_current_auth_active_user,
     get_current_token_payload_user,
+    register_user,
 )
 from core.auth import utils as auth_utils
 
 router = APIRouter(prefix="/users", tags=["Authorization"])
 
 @router.post("/login", response_model=Token)
-def auth_user_issue_jwt(
+async def auth_user_issue_jwt(
     user: UserAuth = Depends(authenticate_user),
 ):
     jwt_payload = {
@@ -40,3 +44,17 @@ def auth_user_check_self_info(
         "phone": user.phone,
         "logged_in_at": iat,
     }
+
+@router.post("/register", response_model=Token)
+async def auth_user_register(
+        user: UserAuth = Depends(register_user),
+):
+    jwt_payload = {
+        "sub": user.username,
+        "username": user.username,
+    }
+    token = auth_utils.encode_jwt(jwt_payload)
+    return Token(
+        access_token=token,
+        token_type="Bearer",
+    )

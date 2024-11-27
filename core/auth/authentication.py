@@ -1,3 +1,4 @@
+from sqlalchemy import IntegrityError
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from fastapi import Form, HTTPException, status, Depends
@@ -10,6 +11,8 @@ from core.auth import utils as auth_utils
 from core.models.db_helper import db_helper
 
 from api_v1.users.db_controller import UsersRepository
+
+import bcrypt
 
 http_bearer = HTTPBearer()
 
@@ -99,3 +102,35 @@ async def get_current_auth_active_user(
         status_code=status.HTTP_403_FORBIDDEN,
         detail="user inactive",
     )
+
+
+async def register_user(
+        username: str = Form(),
+        password: str = Form(),
+        phone: str = Form(None),
+        fullname: str = Form(None),
+        session: AsyncSession = Depends(db_helper.scoped_session_dependency),
+) -> UserAuth:
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+
+    user_auth = UserAuth(
+        username=username,
+        password=hashed_password,
+        phone=phone,
+        fullname=fullname,
+    )
+
+    try:
+        await UsersRepository.create_new_user(session=session, user_auth=user_auth)
+        return user_auth
+    except IntegrityError as e:
+        await session.rollback()
+        if "unique constraint" in str(e.orig).lower():
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="A user with this username or phone already exists",
+            )
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="An unexpected error occurred",
+        )
