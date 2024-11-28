@@ -15,9 +15,10 @@ from core.auth import utils as auth_utils
 
 router = APIRouter(prefix="/users", tags=["Authorization"])
 
+
 @router.post("/login", response_model=Token)
 async def auth_user_issue_jwt(
-    user: UserAuth = Depends(authenticate_user),
+        user: UserAuth = Depends(authenticate_user),
 ):
     jwt_payload = {
         "sub": user.username,
@@ -32,8 +33,8 @@ async def auth_user_issue_jwt(
 
 @router.get("/me")
 def auth_user_check_self_info(
-    payload: dict = Depends(get_current_token_payload_user),
-    user: UserAuth = Depends(get_current_auth_active_user),
+        payload: dict = Depends(get_current_token_payload_user),
+        user: UserAuth = Depends(get_current_auth_active_user),
 ):
     iat = payload.get("iat")
     return {
@@ -41,6 +42,7 @@ def auth_user_check_self_info(
         "phone": user.phone,
         "logged_in_at": iat,
     }
+
 
 @router.post("/register", response_model=Token)
 async def auth_user_register(
