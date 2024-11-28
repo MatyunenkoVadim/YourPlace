@@ -4,82 +4,66 @@
     <meta charset="UTF-8">
     <title>Свое Место</title>
     <link rel="stylesheet" href="/static/style.css">
-    <style>
-        /* Временные столики и стулья, потом заменим на готовые нашим дизигнером варианты*/
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .seating-area {
-            display: flex;
-            flex-wrap: wrap;
-            width: 600px;
-            margin: auto;
-            border: 1px solid #ccc;
-            padding: 20px;
-        }
-        .table {
-            width: 100px;
-            height: 100px;
-            margin: 10px;
-            background-color: #3498db;
-            border: 2px solid transparent;
-            border-radius: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            position: relative;
-        }
-        .table.selected {
-            background-color: #e74c3c;
-            border-color: #fff;
-        }
-        .table-number {
-            color: white;
-            font-size: 1.5em;
-        }
-        .chair {
-            position: absolute;
-            width: 20px;
-            height: 20px;
-            background-color: #2ecc71;
-            border-radius: 50%;
-        }
-        .chair:nth-child(1) { top: -10px; left: 40px; }
-        .chair:nth-child(2) { top: 40px; left: -10px; }
-        .chair:nth-child(3) { top: 40px; left: 90px; }
-        .chair:nth-child(4) { top: 90px; left: 40px; }
-    </style>
 </head>
 <body>
-
 {% include 'header.html' %}
+<div class="container">
+    <img src="/images/seating.svg" alt="Схема рассадки" class="seating-layout">
 
-<div class="content">
-    <h1>Выберите столик</h1>
-    <div class="seating-area">
-        <div class="table" id="table_1" onclick="selectTable(1)">
-            <div class="table-number">1</div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-        </div>
-        <div class="table" id="table_2" onclick="selectTable(2)">
-            <div class="table-number">2</div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-        </div>
-        <div class="table" id="table_3" onclick="selectTable(3)">
-            <div class="table-number">3</div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-            <div class="chair"></div>
-        </div>
+    <div class="table-point" style="top: 14.2%; left: 15.7%;" onclick="selectTable(1)">
+        <img src="/images/tableFor4.svg">
     </div>
+    <div class="table-point" style="top: 14.2%; left: 32.3%;" onclick="selectTable(2)">
+        <img src="/images/tableFor4.svg">
+    </div>
+    <div class="table-point" style="top: 17%; left: 80.5%;" onclick="selectTable(3)">
+        <img src="/images/tableFor6.svg">
+    </div>
+
+    <div class="table-point" style="top: 25%; left: 5%; transform: rotate(90deg);" onclick="selectTable(4)">
+        <img src="/images/tableFor6.svg">
+    </div>
+    <div class="table-point" style="top: 25%; left: 20%; transform: rotate(90deg);" onclick="selectTable(5)">
+        <img src="/images/tableFor6.svg">
+    </div>
+    <div class="table-point" style="top: 51%; left: 69.9%;" onclick="selectTable(6)">
+        <img src="/images/tableFor4.svg">
+    </div>
+
+    <div class="table-point" style="top: 61.5%; left: 7%;" onclick="selectTable(7)">
+        <img src="/images/tableFor2.svg">
+    </div>
+    <div class="table-point" style="top: 61.5%; left: 17%;" onclick="selectTable(8)">
+        <img src="/images/tableFor2.svg">
+    </div>
+    <div class="table-point" style="top: 61%; left: 27%; transform: rotate(90deg);" onclick="selectTable(9)">
+        <img src="/images/tableFor2.svg">
+    </div>
+    <div class="table-point" style="top: 61%; left: 54%; transform: rotate(90deg);" onclick="selectTable(10)">
+        <img src="/images/tableFor2.svg">
+    </div>
+
+    <div class="table-point" style="top: 87%; left: 9.5%;" onclick="selectTable(11)">
+        <img src="/images/tableFor5.svg">
+    </div>
+    <div class="table-point" style="top: 87%; left: 20.8%;" onclick="selectTable(12)">
+        <img src="/images/tableFor5.svg">
+    </div>
+    <div class="table-point" style="top: 87%; left: 32.5%;" onclick="selectTable(13)">
+        <img src="/images/tableFor5.svg">
+    </div>
+    <div class="table-point" style="top: 87%; left: 57%;" onclick="selectTable(14)">
+        <img src="/images/tableFor5.svg">
+    </div>
+    <div class="table-point" style="top: 87%; left: 69.9%;" onclick="selectTable(15)">
+        <img src="/images/tableFor5.svg">
+    </div>
+    <div class="table-point" style="top: 87%; left: 82.5%;" onclick="selectTable(16)">
+        <img src="/images/tableFor5.svg">
+    </div>
+</div>
+
+</div>
     <form action="/result" method="post" id="reservationForm" style="display: none;">
         <input type="hidden" name="guest_count" value="{{ guest_count }}">
         <input type="hidden" name="reservation_date" value="{{ reservation_date }}">
@@ -90,20 +74,24 @@
 
 <script>
     function selectTable(tableId) {
-        // Deselect all tables
-        const tables = document.querySelectorAll('.table');
-        tables.forEach(table => {
-            table.classList.remove('selected');
-        });
+        console.log(`Столик ${tableId} выбран`);
 
-        // Select the clicked table
-        const selectedTable = document.getElementById(`table_${tableId}`);
-        selectedTable.classList.add('selected');
+        // Снимаем выделение со всех точек
+        const points = document.querySelectorAll('.table-point');
+        points.forEach(point => point.classList.remove('selected'));
+
+        // Выделяем выбранный столик
+        const selectedPoint = document.querySelector(`.table-point[onclick="selectTable(${tableId})"]`);
+        if (selectedPoint) {
+            selectedPoint.classList.add('selected');
+        }
+
+        // Устанавливаем значение в скрытое поле формы
         document.getElementById('selected_table').value = tableId;
-        document.getElementById('reservationForm').style.display = 'block';
 
+        // Отображаем форму бронирования
+        document.getElementById('reservationForm').style.display = 'block';
     }
 </script>
-
 </body>
 </html>

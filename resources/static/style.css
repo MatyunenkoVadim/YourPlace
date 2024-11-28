@@ -236,3 +236,50 @@ body {
 #time-selection:hover {
     border-color: #2C1107;
 }
+
+/* Контейнер для схемы */
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    margin: 20px auto;
+    padding: 20px;
+    overflow: hidden;
+}
+
+/* Схема рассадки */
+.seating-layout {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+
+/* Столики */
+.table-point {
+    position: absolute;
+    width: 7vw;
+    height: 7vw;
+    cursor: pointer;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Полупрозрачный столик при наведении */
+.table-point:hover {
+    opacity: 0.9;
+}
+
+/* Столик становится полностью видимым, когда выбран */
+.table-point.selected {
+    opacity: 1;
+}
+
+/* Фоновое изображение для столика */
+.table-point img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none;
+}
