@@ -255,31 +255,33 @@ body {
     margin: 0 auto;
 }
 
-/* Столики */
+/* Изначально столики отображаются */
 .table-point {
     position: absolute;
     width: 7vw;
     height: 7vw;
     cursor: pointer;
     transform: translate(-50%, -50%);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+    opacity: 1; /* Отображаются сразу */
+    transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
-/* Полупрозрачный столик при наведении */
-.table-point:hover {
-    opacity: 0.9;
+/* Наведение: выделение */
+.table-point:hover img {
+    transform: scale(1.05); /* Лёгкое увеличение */
 }
 
-/* Столик становится полностью видимым, когда выбран */
-.table-point.selected {
-    opacity: 1;
-}
-
-/* Фоновое изображение для столика */
+/* Изображения столиков */
 .table-point img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     pointer-events: none;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+
+/* Столик становится полностью видимым, когда выбран */
+.table-point.selected {
+    opacity: 1;
 }

@@ -43,22 +43,22 @@
         <img src="/images/tableFor2.svg">
     </div>
 
-    <div class="table-point" style="top: 87%; left: 9.5%;" onclick="selectTable(11)">
+    <div class="table-point" style="top: 86%; left: 9.5%;" onclick="selectTable(11)">
         <img src="/images/tableFor5.svg">
     </div>
-    <div class="table-point" style="top: 87%; left: 20.8%;" onclick="selectTable(12)">
+    <div class="table-point" style="top: 86%; left: 20.8%;" onclick="selectTable(12)">
         <img src="/images/tableFor5.svg">
     </div>
-    <div class="table-point" style="top: 87%; left: 32.5%;" onclick="selectTable(13)">
+    <div class="table-point" style="top: 86%; left: 32.5%;" onclick="selectTable(13)">
         <img src="/images/tableFor5.svg">
     </div>
-    <div class="table-point" style="top: 87%; left: 57%;" onclick="selectTable(14)">
+    <div class="table-point" style="top: 86%; left: 57%;" onclick="selectTable(14)">
         <img src="/images/tableFor5.svg">
     </div>
-    <div class="table-point" style="top: 87%; left: 69.9%;" onclick="selectTable(15)">
+    <div class="table-point" style="top: 86%; left: 69.9%;" onclick="selectTable(15)">
         <img src="/images/tableFor5.svg">
     </div>
-    <div class="table-point" style="top: 87%; left: 82.5%;" onclick="selectTable(16)">
+    <div class="table-point" style="top: 86%; left: 82.5%;" onclick="selectTable(16)">
         <img src="/images/tableFor5.svg">
     </div>
 </div>
@@ -73,23 +73,53 @@
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Перебираем все точки столиков
+        document.querySelectorAll('.table-point').forEach(table => {
+            const img = table.querySelector('img');
+            const originalSrc = img.src; // Исходное изображение
+            const selectedSrc = originalSrc.replace('.svg', '_selected.svg'); // Изображение при наведении/выборе
+
+            // Обработчик для наведения мыши
+            table.addEventListener('mouseenter', () => {
+                if (!table.classList.contains('selected')) {
+                    img.src = selectedSrc; // Меняем на выделенное
+                }
+            });
+
+            // Обработчик для ухода курсора
+            table.addEventListener('mouseleave', () => {
+                if (!table.classList.contains('selected')) {
+                    img.src = originalSrc; // Возвращаем исходное изображение
+                }
+            });
+        });
+    });
+
     function selectTable(tableId) {
         console.log(`Столик ${tableId} выбран`);
 
-        // Снимаем выделение со всех точек
-        const points = document.querySelectorAll('.table-point');
-        points.forEach(point => point.classList.remove('selected'));
+        // Снимаем выделение со всех столиков
+        document.querySelectorAll('.table-point').forEach(point => {
+            point.classList.remove('selected');
+            const img = point.querySelector('img');
+            const originalSrc = img.src.replace('_selected.svg', '.svg');
+            img.src = originalSrc; // Возвращаем исходное изображение
+        });
 
         // Выделяем выбранный столик
         const selectedPoint = document.querySelector(`.table-point[onclick="selectTable(${tableId})"]`);
         if (selectedPoint) {
             selectedPoint.classList.add('selected');
+            const img = selectedPoint.querySelector('img');
+            const selectedSrc = img.src.replace('.svg', '_selected.svg');
+            img.src = selectedSrc; // Устанавливаем выделенное изображение
         }
 
-        // Устанавливаем значение в скрытое поле формы
+        // Записываем ID выбранного столика в скрытое поле формы
         document.getElementById('selected_table').value = tableId;
 
-        // Отображаем форму бронирования
+        // Показываем форму бронирования
         document.getElementById('reservationForm').style.display = 'block';
     }
 </script>
