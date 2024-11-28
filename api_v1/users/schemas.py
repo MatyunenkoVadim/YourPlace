@@ -11,12 +11,12 @@ class User(BaseModel):
 
 class UserInDB(User):
     id: int
-    hashed_password: str
+    password: str
     active: bool = True
 
 
 class UserAuth(User):
-    hashed_password: bytes = Field(..., alias="password")
+    hashed_password: bytes
     active: bool = True
 
 class UserRegister(BaseModel):

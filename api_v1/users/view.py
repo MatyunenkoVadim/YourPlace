@@ -28,9 +28,9 @@ async def get_user(
         username: str,
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ):
-    reservation = await UsersRepository.find_user(session=session, username=username)
-    if reservation is not None:
-        return reservation
+    user = await UsersRepository.find_user(session=session, username=username)
+    if user is not None:
+        return user
 
     raise HTTPException(
         status_code=status.HTTP_404_NOT_FOUND,

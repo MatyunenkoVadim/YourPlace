@@ -16,12 +16,7 @@ from routes.reservation import router as router_reservation
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     pass
-    # await delete_tables()
-    # print("База очищена")
-    # await create_table()
-    # print("База готова")
-    # yield
-    # print("Выключение")
+
 
 app = FastAPI(
     # lifespan=lifespan,

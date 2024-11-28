@@ -5,7 +5,7 @@ from fastapi import Form, HTTPException, status, Depends
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from jwt.exceptions import InvalidTokenError
 
-from api_v1.users.schemas import UserAuth, UserRegister
+from api_v1.users.schemas import UserAuth, UserRegister, UserInDB
 from core.secure import hashed as auth_password
 from core.auth import utils as auth_utils
 from core.models.db_helper import db_helper
@@ -113,12 +113,15 @@ async def register_user(
 
     user_auth = UserAuth(
         username=username,
-        password=hashed_password,
+        hashed_password=hashed_password,
     )
 
     try:
         await UsersRepository.create_new_user(session=session, user_auth=user_auth)
-        return UserRegister(**user_auth.model_dump())
+        return UserRegister(
+            username=user_auth.username,
+            password=user_auth.hashed_password.decode(),
+        )
     except IntegrityError as e:
         await session.rollback()
         if "unique constraint" in str(e.orig).lower():
