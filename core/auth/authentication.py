@@ -107,8 +107,6 @@ async def get_current_auth_active_user(
 async def register_user(
         username: str = Form(),
         password: str = Form(),
-        phone: str = Form(None),
-        fullname: str = Form(None),
         session: AsyncSession = Depends(db_helper.scoped_session_dependency),
 ) -> UserRegister:
     hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
@@ -116,8 +114,6 @@ async def register_user(
     user_auth = UserAuth(
         username=username,
         password=hashed_password,
-        phone=phone,
-        fullname=fullname,
     )
 
     try:
