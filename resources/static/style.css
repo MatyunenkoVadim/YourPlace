@@ -62,13 +62,13 @@ body {
 /* Центрирование содержимого */
 .content {
     text-align: center;
-    margin-top: 20px;
     padding-top: 20px;
 }
 
-.content h1 {
+h1 {
     margin-bottom: 20px;
     font-size: 2em;
+    margin-top: 20px;
 }
 
 /* Контейнер для выбора количества гостей */
@@ -237,51 +237,43 @@ body {
     border-color: #2C1107;
 }
 
-/* Контейнер для схемы */
+/* Основной контейнер */
 .container {
     position: relative;
     width: 100%;
     max-width: 1000px;
-    margin: 20px auto;
-    padding: 20px;
+    margin: 0 auto;
     overflow: hidden;
 }
 
-/* Схема рассадки */
+/* Контейнер для схемы */
 .seating-layout {
-    display: block;
+    position: relative;
     width: 100%;
-    height: auto;
-    margin: 0 auto;
+    padding-top: 50%;
+    background: url('/images/seating.svg') no-repeat center center;
+    background-size: contain;
 }
 
-/* Изначально столики отображаются */
+/* Столики */
 .table-point {
     position: absolute;
-    width: 7vw;
-    height: 7vw;
-    cursor: pointer;
+    width: 14%;
+    height: 14%;
     transform: translate(-50%, -50%);
-    opacity: 1; /* Отображаются сразу */
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
 }
 
-/* Наведение: выделение */
-.table-point:hover img {
-    transform: scale(1.05); /* Лёгкое увеличение */
-}
-
-/* Изображения столиков */
+/* Изображение столика */
 .table-point img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     pointer-events: none;
-    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-
-/* Столик становится полностью видимым, когда выбран */
-.table-point.selected {
-    opacity: 1;
+/* Наведение */
+.table-point:hover img {
+    transform: scale(1.1);
 }

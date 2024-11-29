@@ -8,60 +8,62 @@
 <body>
 {% include 'header.html' %}
 <div class="container">
-    <img src="/images/seating.svg" alt="Схема рассадки" class="seating-layout">
+    <h1>Выберите столик</h1>
+    <div class="seating-layout">
+        <div class="table-point" style="top: 10%; left: 16.5%;" onclick="selectTable(1)">
+            <img src="/images/tableFor4.svg" alt="Table for 4">
+        </div>
+        <div class="table-point" style="top: 10%; left: 32.5%;" onclick="selectTable(2)">
+            <img src="/images/tableFor4.svg">
+        </div>
+        <div class="table-point" style="top: 14%; left: 80%; width: 15%; height: 15%;" onclick="selectTable(3)">
+            <img src="/images/tableFor6.svg">
+        </div>
 
-    <div class="table-point" style="top: 14.2%; left: 15.7%;" onclick="selectTable(1)">
-        <img src="/images/tableFor4.svg">
-    </div>
-    <div class="table-point" style="top: 14.2%; left: 32.3%;" onclick="selectTable(2)">
-        <img src="/images/tableFor4.svg">
-    </div>
-    <div class="table-point" style="top: 17%; left: 80.5%;" onclick="selectTable(3)">
-        <img src="/images/tableFor6.svg">
-    </div>
+        <div class="table-point" style="top: 24%; left: 3%; transform: rotate(90deg); width: 15%; height: 15%;" onclick="selectTable(4)">
+            <img src="/images/tableFor6.svg">
+        </div>
+        <div class="table-point" style="top: 24%; left: 16.5%; transform: rotate(90deg); width: 15%; height: 15%;" onclick="selectTable(5)">
+            <img src="/images/tableFor6.svg">
+        </div>
+        <div class="table-point" style="top: 51%; left: 71%;" onclick="selectTable(6)">
+            <img src="/images/tableFor4.svg">
+        </div>
 
-    <div class="table-point" style="top: 25%; left: 5%; transform: rotate(90deg);" onclick="selectTable(4)">
-        <img src="/images/tableFor6.svg">
-    </div>
-    <div class="table-point" style="top: 25%; left: 20%; transform: rotate(90deg);" onclick="selectTable(5)">
-        <img src="/images/tableFor6.svg">
-    </div>
-    <div class="table-point" style="top: 51%; left: 69.9%;" onclick="selectTable(6)">
-        <img src="/images/tableFor4.svg">
-    </div>
+        <div class="table-point" style="top: 62%; left: 8%; width: 15%; height: 15%;" onclick="selectTable(7)">
+            <img src="/images/tableFor2.svg">
+        </div>
+        <div class="table-point" style="top: 62%; left: 19%; width: 15%; height: 15%;" onclick="selectTable(8)">
+            <img src="/images/tableFor2.svg">
+        </div>
+        <div class="table-point" style="top: 60%; left: 27%; transform: rotate(90deg); width: 15%; height: 15%;" onclick="selectTable(9)">
+            <img src="/images/tableFor2.svg">
+        </div>
+        <div class="table-point" style="top: 60%; left: 54%; transform: rotate(90deg); width: 15%; height: 15%;" onclick="selectTable(10)">
+            <img src="/images/tableFor2.svg">
+        </div>
 
-    <div class="table-point" style="top: 61.5%; left: 7%;" onclick="selectTable(7)">
-        <img src="/images/tableFor2.svg">
-    </div>
-    <div class="table-point" style="top: 61.5%; left: 17%;" onclick="selectTable(8)">
-        <img src="/images/tableFor2.svg">
-    </div>
-    <div class="table-point" style="top: 61%; left: 27%; transform: rotate(90deg);" onclick="selectTable(9)">
-        <img src="/images/tableFor2.svg">
-    </div>
-    <div class="table-point" style="top: 61%; left: 54%; transform: rotate(90deg);" onclick="selectTable(10)">
-        <img src="/images/tableFor2.svg">
-    </div>
-
-    <div class="table-point" style="top: 86%; left: 9.5%;" onclick="selectTable(11)">
-        <img src="/images/tableFor5.svg">
-    </div>
-    <div class="table-point" style="top: 86%; left: 20.8%;" onclick="selectTable(12)">
-        <img src="/images/tableFor5.svg">
-    </div>
-    <div class="table-point" style="top: 86%; left: 32.5%;" onclick="selectTable(13)">
-        <img src="/images/tableFor5.svg">
-    </div>
-    <div class="table-point" style="top: 86%; left: 57%;" onclick="selectTable(14)">
-        <img src="/images/tableFor5.svg">
-    </div>
-    <div class="table-point" style="top: 86%; left: 69.9%;" onclick="selectTable(15)">
-        <img src="/images/tableFor5.svg">
-    </div>
-    <div class="table-point" style="top: 86%; left: 82.5%;" onclick="selectTable(16)">
-        <img src="/images/tableFor5.svg">
+        <div class="table-point" style="top: 89%; left: 10%; width: 12%; height: 12%;" onclick="selectTable(11)">
+            <img src="/images/tableFor5.svg">
+        </div>
+        <div class="table-point" style="top: 89%; left: 21.5%; width: 12%; height: 12%;" onclick="selectTable(12)">
+            <img src="/images/tableFor5.svg">
+        </div>
+        <div class="table-point" style="top: 89%; left: 33%; width: 12%; height: 12%;" onclick="selectTable(13)">
+            <img src="/images/tableFor5.svg">
+        </div>
+        <div class="table-point" style="top: 89%; left: 57.3%; width: 12%; height: 12%;" onclick="selectTable(14)">
+            <img src="/images/tableFor5.svg">
+        </div>
+        <div class="table-point" style="top: 89%; left: 69.5%; width: 12%; height: 12%;" onclick="selectTable(15)">
+            <img src="/images/tableFor5.svg">
+        </div>
+        <div class="table-point" style="top: 89%; left: 82%; width: 12%; height: 12%;" onclick="selectTable(16)">
+            <img src="/images/tableFor5.svg">
+        </div>
     </div>
 </div>
+
 
 </div>
     <form action="/result" method="post" id="reservationForm" style="display: none;">
@@ -74,54 +76,53 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        // Перебираем все точки столиков
-        document.querySelectorAll('.table-point').forEach(table => {
-            const img = table.querySelector('img');
-            const originalSrc = img.src; // Исходное изображение
-            const selectedSrc = originalSrc.replace('.svg', '_selected.svg'); // Изображение при наведении/выборе
+    // Добавляем обработчики событий для всех столиков
+    document.querySelectorAll('.table-point').forEach(table => {
+        const img = table.querySelector('img');
+        const originalSrc = img.src; // Исходное изображение
+        const selectedSrc = originalSrc.replace('.svg', '_selected.svg'); // Изображение при выборе
 
-            // Обработчик для наведения мыши
-            table.addEventListener('mouseenter', () => {
-                if (!table.classList.contains('selected')) {
-                    img.src = selectedSrc; // Меняем на выделенное
-                }
-            });
+        // Наведение мыши
+        table.addEventListener('mouseenter', () => {
+            if (!table.classList.contains('selected')) {
+                img.src = selectedSrc;
+            }
+        });
 
-            // Обработчик для ухода курсора
-            table.addEventListener('mouseleave', () => {
-                if (!table.classList.contains('selected')) {
-                    img.src = originalSrc; // Возвращаем исходное изображение
-                }
-            });
+        // Уход мыши
+        table.addEventListener('mouseleave', () => {
+            if (!table.classList.contains('selected')) {
+                img.src = originalSrc;
+            }
         });
     });
+});
 
-    function selectTable(tableId) {
-        console.log(`Столик ${tableId} выбран`);
+function selectTable(tableId) {
+    console.log(`Столик ${tableId} выбран`);
 
-        // Снимаем выделение со всех столиков
-        document.querySelectorAll('.table-point').forEach(point => {
-            point.classList.remove('selected');
-            const img = point.querySelector('img');
-            const originalSrc = img.src.replace('_selected.svg', '.svg');
-            img.src = originalSrc; // Возвращаем исходное изображение
-        });
+    // Сброс выделения для всех столиков
+    document.querySelectorAll('.table-point').forEach(point => {
+        point.classList.remove('selected');
+        const img = point.querySelector('img');
+        img.src = img.src.replace('_selected.svg', '.svg');
+    });
 
-        // Выделяем выбранный столик
-        const selectedPoint = document.querySelector(`.table-point[onclick="selectTable(${tableId})"]`);
-        if (selectedPoint) {
-            selectedPoint.classList.add('selected');
-            const img = selectedPoint.querySelector('img');
-            const selectedSrc = img.src.replace('.svg', '_selected.svg');
-            img.src = selectedSrc; // Устанавливаем выделенное изображение
-        }
-
-        // Записываем ID выбранного столика в скрытое поле формы
-        document.getElementById('selected_table').value = tableId;
-
-        // Показываем форму бронирования
-        document.getElementById('reservationForm').style.display = 'block';
+    // Выделяем выбранный столик
+    const selectedTable = document.querySelector(`.table-point[onclick="selectTable(${tableId})"]`);
+    if (selectedTable) {
+        selectedTable.classList.add('selected');
+        const img = selectedTable.querySelector('img');
+        img.src = img.src.replace('.svg', '_selected.svg');
     }
+
+    // Обновляем скрытое поле формы
+    document.getElementById('selected_table').value = tableId;
+
+    // Показываем форму бронирования
+    document.getElementById('reservationForm').style.display = 'block';
+}
+
 </script>
 </body>
 </html>
