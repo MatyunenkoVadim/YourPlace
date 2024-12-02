@@ -11,17 +11,17 @@ from api_v1.reservations.db_controller import ReservationRepository
 from core.models import db_helper
 
 router = APIRouter()
-templates = Jinja2Templates(directory="resources/templates")
+templates = Jinja2Templates(directory="resources/static")
 
 
 @router.get("/guests", response_class=HTMLResponse)
 async def select_guests(request: Request):
-    return templates.TemplateResponse("guests.html", {"request": request})
+    return templates.TemplateResponse("index.html", {"request": request})
 
 
 @router.get("/datetime", response_class=HTMLResponse)
 async def select_datetime(request: Request, guest_count: int):
-    return templates.TemplateResponse("datetime.html", {"request": request, "guest_count": guest_count})
+    return templates.TemplateResponse("index.html", {"request": request, "guest_count": guest_count})
 
 
 @router.get("/table_selection", response_class=HTMLResponse)
@@ -32,7 +32,7 @@ async def select_table(request: Request, guest_count: int, reservation_date: str
     except ValueError:
         return HTMLResponse(content="Invalid date format.", status_code=400)
 
-    return templates.TemplateResponse("table_selection.html", {
+    return templates.TemplateResponse("index.html", {
         "request": request,
         "guest_count": guest_count,
         "reservation_date": reservation_date
@@ -63,7 +63,7 @@ async def reserve_table(
 
     print(f"Reservation made: {guest_count} guests on {reservation_date} at Table {table_number}")
 
-    return templates.TemplateResponse("result.html", {
+    return templates.TemplateResponse("index.html", {
         "request": request,
         "guest_count": guest_count,
         "reservation_date": reservation_date.strftime("%Y-%m-%d %H:%M:%S"),

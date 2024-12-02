@@ -7,6 +7,7 @@ from starlette.responses import HTMLResponse
 from starlette.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 
+from app.customStaticFiles import CustomStaticFiles
 from core.config import settings
 from routes.users import router as router_users
 from api_v1 import router as router_api_vi
@@ -21,9 +22,10 @@ async def lifespan(app: FastAPI):
 app = FastAPI(
     # lifespan=lifespan,
 )
-templates = Jinja2Templates(directory="resources/templates")
+
+templates = Jinja2Templates(directory="resources/static")
+app.mount("/assets", CustomStaticFiles(directory="resources/static/assets"), name="assets")
 app.mount("/static", StaticFiles(directory="resources/static"), name="static")
-app.mount("/images", StaticFiles(directory="resources/images"), name="images")
 
 app.add_middleware(
     CORSMiddleware,
