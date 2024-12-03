@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import axiosInstance from "../axiosConfig";
 import Header from "../components/Header.jsx";
 
 const ResultPage = () => {
   const [guestCount, setGuestCount] = useState(null);
   const [reservationDate, setReservationDate] = useState(null);
   const [tableNumber, setTableNumber] = useState(null);
+  const [loading, setLoading] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -30,6 +32,30 @@ const ResultPage = () => {
     }
   }, [location, navigate]);
 
+  const handleReservation = async () => {
+    setLoading(true);
+    try {
+      const formData = new FormData();
+      formData.append("guest_count", guestCount);
+      formData.append("reservation_date", reservationDate);
+      formData.append("table_number", tableNumber);
+
+      const response = await axiosInstance.post("/result", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      // Дополнительная логика, если нужно, в случае успешного бронирования
+      console.log("Reservation successful:", response.data);
+    } catch (error) {
+      console.error("Error during reservation:", error);
+      alert("Произошла ошибка при бронировании. Пожалуйста, попробуйте снова.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div>
       <Header />
@@ -46,6 +72,9 @@ const ResultPage = () => {
             <p>
               <strong>Номер столика:</strong> {tableNumber}
             </p>
+            <button onClick={handleReservation} disabled={loading} className="button">
+              {loading ? "Бронирование..." : "Забронировать"}
+            </button>
             <a href="/" className="button">
               Вернуться на главную
             </a>

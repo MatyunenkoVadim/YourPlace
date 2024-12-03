@@ -13,6 +13,8 @@ const GuestsPage = () => {
   const handleNextClick = () => {
     if (guestCount) {
       navigate(`/datetime?guest_count=${guestCount}`);
+    } else {
+      alert("Выберите количество гостей.");
     }
   };
 
@@ -20,7 +22,7 @@ const GuestsPage = () => {
     <div>
       <Header />
       <div className="content">
-        <h1>Выберите кол-во гостей</h1>
+        <h1>Выберите количество гостей</h1>
         <div className="guest-count-container">
           {[1, 2, 3, 4, 5, 6].map((count) => (
             <div
