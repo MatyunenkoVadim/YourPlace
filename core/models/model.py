@@ -1,7 +1,6 @@
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
+from .mixins.id_int_pk import IdIntPkMixin
 
-class Model(DeclarativeBase):
+class Model(DeclarativeBase, IdIntPkMixin):
     __abstract__ = True
-
-    id: Mapped[int] = mapped_column(primary_key=True)
         
