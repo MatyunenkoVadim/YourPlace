@@ -9,6 +9,7 @@ from starlette.templating import Jinja2Templates
 
 from app.customStaticFiles import CustomStaticFiles
 from core.config import settings
+from core.models import db_helper
 from routes.users import router as router_users
 from api_v1 import router as router_api_vi
 from routes.reservation import router as router_reservation
@@ -16,11 +17,14 @@ from routes.reservation import router as router_reservation
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    pass
+    # startup
+    yield
+    # shutdown
+    await db_helper.dispose()
 
 
 app = FastAPI(
-    # lifespan=lifespan,
+    lifespan=lifespan,
 )
 
 templates = Jinja2Templates(directory="resources/static")
