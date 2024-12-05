@@ -4,7 +4,7 @@ from core.config import settings
 
 from api_v1.dependencies.auth.backend import authentication_backend
 from .fastapi_users_routes import fastapi_users
-from ..dependencies.auth.schemas import (
+from api_v1.dependencies.auth.schemas import (
     UserRead,
     UserCreate,
 )

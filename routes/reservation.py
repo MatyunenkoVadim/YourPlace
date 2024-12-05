@@ -8,7 +8,7 @@ from starlette.templating import Jinja2Templates
 
 from api_v1.reservations.schemas import ReservationCreate
 from api_v1.reservations.db_controller import ReservationRepository
-from core.models import db_helper
+from core.models.db_helper import db_helper
 
 router = APIRouter()
 templates = Jinja2Templates(directory="resources/static")
