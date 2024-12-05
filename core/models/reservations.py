@@ -6,12 +6,13 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .model import Model
+from .mixins.id_int_pk import IdIntPkMixin
 
 if TYPE_CHECKING:
     from .visitors import Visitor
     from .tables import Table
 
-class Reservation(Model):
+class Reservation(Model, IdIntPkMixin):
     __tablename__ = "reservations"
 
     guest_count: Mapped[int]

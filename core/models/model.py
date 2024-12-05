@@ -1,6 +1,5 @@
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
-from .mixins.id_int_pk import IdIntPkMixin
+from sqlalchemy.orm import DeclarativeBase
 
-class Model(DeclarativeBase, IdIntPkMixin):
+class Model(DeclarativeBase):
     __abstract__ = True
         
