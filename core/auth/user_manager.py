@@ -7,7 +7,7 @@ from fastapi_users import (
 )
 
 from core.config import settings
-from core.models import UserDB
+from core.models import User
 
 if TYPE_CHECKING:
     from fastapi import Request
@@ -15,13 +15,13 @@ if TYPE_CHECKING:
 log = logging.getLogger(__name__)
 
 
-class UserManager(IntegerIDMixin, BaseUserManager[UserDB, int]):
+class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     reset_password_token_secret = settings.auth_jwt.reset_password_token_secret
     verification_token_secret = settings.auth_jwt.verification_token_secret
 
     async def on_after_register(
         self,
-        user: UserDB,
+        user: User,
         request: Optional["Request"] = None,
     ):
         log.warning(
@@ -31,7 +31,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[UserDB, int]):
 
     async def on_after_request_verify(
         self,
-        user: UserDB,
+        user: User,
         token: str,
         request: Optional["Request"] = None,
     ):
@@ -43,7 +43,7 @@ class UserManager(IntegerIDMixin, BaseUserManager[UserDB, int]):
 
     async def on_after_forgot_password(
         self,
-        user: UserDB,
+        user: User,
         token: str,
         request: Optional["Request"] = None,
     ):

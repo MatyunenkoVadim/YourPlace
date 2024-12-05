@@ -5,7 +5,7 @@ from typing import (
 
 from fastapi import Depends
 
-from core.models import UserDB
+from core.models import User
 from core.models.db_helper import db_helper
 
 if TYPE_CHECKING:
@@ -18,5 +18,4 @@ async def get_users_db(
         Depends(db_helper.get_scoped_session),
     ],
 ):
-    # TODO: изменить на User
-    yield UserDB.get_db(session=session)
+    yield User.get_db(session=session)
