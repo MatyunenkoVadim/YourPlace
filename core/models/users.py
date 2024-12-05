@@ -13,24 +13,23 @@ from .mixins.id_int_pk import IdIntPkMixin
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
-class UserDB(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
-# class UserDB(Model, SQLAlchemyBaseUserTable[UserIdType]):
-    __tablename__ = "user"
+class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
+    __tablename__ = "users"
 
-    # username: Mapped[str] = mapped_column(unique=True)
-    # phone: Mapped[str | None] = mapped_column(unique=True)
-    # fullname: Mapped[str | None]
+    username: Mapped[str] = mapped_column(unique=True)
+    phone: Mapped[str | None] = mapped_column(unique=True)
+    fullname: Mapped[str | None]
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, cls)
 
 
-class User(Model, IdIntPkMixin):
-    __tablename__ = "users"
-
-    username: Mapped[str] = mapped_column(unique=True)
-    phone: Mapped[str | None] = mapped_column(unique=True)
-    fullname: Mapped[str | None]
-    password: Mapped[str]
-    active: Mapped[bool] = mapped_column(default=True)
+# class UserDB(Model, IdIntPkMixin):
+#     __tablename__ = "user"
+#
+#     username: Mapped[str] = mapped_column(unique=True)
+#     phone: Mapped[str | None] = mapped_column(unique=True)
+#     fullname: Mapped[str | None]
+#     password: Mapped[str]
+#     active: Mapped[bool] = mapped_column(default=True)
