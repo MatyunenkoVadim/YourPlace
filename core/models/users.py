@@ -15,18 +15,18 @@ if TYPE_CHECKING:
 
 class UserDB(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
 # class UserDB(Model, SQLAlchemyBaseUserTable[UserIdType]):
-    __tablename__ = "users"
+    __tablename__ = "user"
 
-    username: Mapped[str] = mapped_column(unique=True)
-    phone: Mapped[str | None] = mapped_column(unique=True)
-    fullname: Mapped[str | None]
+    # username: Mapped[str] = mapped_column(unique=True)
+    # phone: Mapped[str | None] = mapped_column(unique=True)
+    # fullname: Mapped[str | None]
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, cls)
 
 
-class User(Model):
+class User(Model, IdIntPkMixin):
     __tablename__ = "users"
 
     username: Mapped[str] = mapped_column(unique=True)
