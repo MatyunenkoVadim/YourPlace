@@ -10,7 +10,7 @@ from starlette.templating import Jinja2Templates
 from app.customStaticFiles import CustomStaticFiles
 from core.config import settings
 from core.models import db_helper
-from routes.users import router as router_users
+# from routes.users import router as router_users
 from api_v1 import router as router_api_vi
 from routes.reservation import router as router_reservation
 
@@ -49,7 +49,7 @@ app.add_middleware(
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-
-app.include_router(router_users)
+# TODO: Delete router_users
+# app.include_router(router_users)
 app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
 app.include_router(router_reservation)
