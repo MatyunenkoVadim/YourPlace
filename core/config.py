@@ -21,6 +21,7 @@ class DBSettings(BaseModel):
 class Settings(BaseSettings):
     api_v1_prefix: str = "/api/v1"
     auth: str = "/auth"
+    users: str = "/users"
     db_setting: DBSettings = DBSettings()
     auth_jwt: AuthJWT = AuthJWT()
 
