@@ -16,22 +16,6 @@ import bcrypt
 
 http_bearer = HTTPBearer()
 
-# mark = UserAuth(
-#     username="mark",
-#     hashed_password=auth_password.hash_password("secret"),
-#     phone="",
-# )
-# admin = UserAuth(
-#     username="admin",
-#     hashed_password=auth_password.hash_password("admin"),
-#     phone="",
-# )
-#
-# users_db: dict[str, UserAuth] = {
-#     mark.username: mark,
-#     admin.username: admin,
-# }
-
 
 async def authenticate_user(
         username: str = Form(),
