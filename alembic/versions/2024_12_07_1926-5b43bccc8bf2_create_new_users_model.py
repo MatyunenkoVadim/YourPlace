@@ -1,8 +1,8 @@
-"""Create User model for fastapi users
+"""Create new users model
 
-Revision ID: c9b3b1ddad3d
+Revision ID: 5b43bccc8bf2
 Revises: b6cce4f2e7d9
-Create Date: 2024-12-05 23:05:19.465823
+Create Date: 2024-12-07 19:26:14.534447
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = 'c9b3b1ddad3d'
+revision: str = '5b43bccc8bf2'
 down_revision: Union[str, None] = 'b6cce4f2e7d9'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
