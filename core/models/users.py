@@ -22,13 +22,3 @@ class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
     @classmethod
     def get_db(cls, session: "AsyncSession"):
         return SQLAlchemyUserDatabase(session, cls)
-
-
-# class UserDB(Model, IdIntPkMixin):
-#     __tablename__ = "user"
-#
-#     username: Mapped[str] = mapped_column(unique=True)
-#     phone: Mapped[str | None] = mapped_column(unique=True)
-#     fullname: Mapped[str | None]
-#     password: Mapped[str]
-#     active: Mapped[bool] = mapped_column(default=True)
