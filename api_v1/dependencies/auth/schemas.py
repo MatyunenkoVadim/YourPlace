@@ -12,6 +12,9 @@ class UserCreate(schemas.BaseUserCreate):
     phone: Optional[str] = None
     fullname: Optional[str] = None
 
+class UserRegister(schemas.BaseUserCreate):
+    pass
+
 
 class UserUpdate(schemas.BaseUserUpdate):
     phone: Optional[str] = None
