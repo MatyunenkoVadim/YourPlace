@@ -16,7 +16,6 @@ if TYPE_CHECKING:
 class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
     __tablename__ = "users"
 
-    username: Mapped[str] = mapped_column(unique=True)
     phone: Mapped[str | None] = mapped_column(unique=True)
     fullname: Mapped[str | None]
 
