@@ -10,12 +10,6 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   }, [currentDate]);
 
   const createCalendar = (year, month) => {
-    const monthNames = [
-      "Январь", "Февраль", "Март", "Апрель",
-      "Май", "Июнь", "Июль", "Август",
-      "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"
-    ];
-
     const firstDay = new Date(year, month, 1).getDay();
     const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
     const daysArray = [];
@@ -43,8 +37,7 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
 
   const handleDayClick = (day) => {
     if (day !== null) {
-      const newDate = new Date(currentDate);
-      newDate.setDate(day);
+      const newDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
       setSelectedDate(newDate);
     }
   };

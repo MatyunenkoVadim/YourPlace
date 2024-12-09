@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
+    justify-content: center; /* Центрируем контент по вертикали */
     margin: 0;
     padding: 0;
     font-weight: 700;
@@ -29,6 +30,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-family: 'Cormorant Unicase';
+    font-weight: 500;
 }
 
 
@@ -46,22 +49,59 @@ body {
     font-size: 1em;
 }
 
-/* Стили кнопок */
+.next-button-container {
+  position: fixed;
+  bottom: 20px; /* Отступ от нижнего края */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 10px;
+}
+
+/* Универсальный стиль для всех кнопок */
 .button {
-    background-color: #085614;
-    color: #FFFDEA;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     padding: 5px 15px;
-    border: none;
+    gap: 19.26px;
+
+    background: #085614;
     border-radius: 5px;
+    border: none;
     cursor: pointer;
-    text-align: center;
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-weight: 400;
     font-size: 1.5em;
+    line-height: 39px;
+    text-align: center;
+    color: #FFFDEA;
+
+    /* Позиционирование с помощью flexbox */
     margin-top: 20px;
+    width: 450px;
+    height: 50px;
     margin-left: auto;
     margin-right: auto;
-    display: inline-block;
-    padding-top: 10px;
-    width: auto;
+    transition: all 0.3s ease-in-out;
+}
+
+.button:hover {
+    background: #073d0e;
+}
+
+.button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.button:focus {
+    outline: 2px solid #fff;
+    outline-offset: 4px;
 }
 
 /* Центрирование содержимого */
@@ -77,40 +117,132 @@ h1 {
     margin-top: 20px;
 }
 
+/* Стили для кнопки */
+.button-info {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 17.075px;
+  gap: 17.08px;
+
+  position: relative;
+  width: 683px;
+  height: 60px;
+  margin-top: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  background: #2C1107;
+  border: none;
+  border-radius: 13.66px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button-info:hover {
+  box-sizing: border-box;
+  background: #FFFDEA;
+  border: 3px solid #2C1107;
+  color: #2C1107;
+}
+
+.button-info-content {
+  font-family: "Montserrat", sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 2em;
+  line-height: 46px;
+  color: #FFFDEA;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+.button-info:hover .button-info-content {
+  color: #2C1107;
+}
+
+.close-button {
+  background: #2C1107;
+  color: #FFFDEA;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background 0.3s;
+}
+
+.close-button:hover {
+  background: #3a150a;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 33px 69px;
+  text-align: center;
+  width: 693px;
+  height: 275.53px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.guest-option:hover {
+  background: #f0e1d6;
+}
+
+h2 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 36.4296px;
+  line-height: 44px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
 /* Контейнер для выбора количества гостей */
 .guest-count-container {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     justify-content: center;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin: 0 auto;
-    flex-wrap: wrap;
-    max-width: 500px;
+    max-width: 400px;
 }
 
 /* Стиль для каждой цифры */
 .guest-option {
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 20.2386px;
-    gap: 20.24px;
-    width: 129.53px;
+    padding: 20px;
+    gap: 10px;
+    width: 100%;
     height: 64.76px;
     background: #FFFDEA;
-    border: 2.02386px solid #2C1107;
-    border-radius: 8.09546px;
+    border: 2px solid #2C1107;
+    border-radius: 8px;
     font-family: 'Montserrat', sans-serif;
     font-style: normal;
     font-weight: 500;
-    font-size: 36.4296px;
+    font-size: 36px;
     line-height: 44px;
-    display: flex;
-    align-items: center;
-    text-align: center;
     color: #2C1107;
+    text-align: center;
     cursor: pointer;
     transition: background 0.3s, color 0.3s;
 }
@@ -121,98 +253,116 @@ h1 {
     color: #FFFDEA;
 }
 
+.guest-option:hover {
+    background: #2C1107;
+    color: #FFFDEA;
+}
+
 /* Общие стили для календаря */
+.calendar-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 .calendar-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background: #FFFDEA;
-    border: 2px solid #2C1107;
-    border-radius: 8px;
-    padding: 10px;
-    width: 300px;
-    margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFFFFF;
+  border-radius: 26.4px;
+  padding: 20px;
+  width: 660px;
+  margin: 40px auto;
 }
 
 .calendar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .calendar-nav {
-    background: none;
-    border: none;
-    color: #2C1107;
-    font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.2s;
+  background: none;
+  border: none;
+  color: #2C1107;
+  font-size: 41px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .calendar-nav:hover {
-    transform: scale(1.2);
+  transform: scale(1.2);
 }
 
 .calendar-month {
-    font-size: 18px;
-    font-weight: bold;
-    color: #2C1107;
+  font-size: 41px;
+  font-weight: bold;
+  color: #2C1107;
 }
 
 .calendar-days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 15px;
 }
 
 .calendar-weekday,
 .calendar-day {
-    text-align: center;
-    padding: 5px;
-    border-radius: 4px;
-    font-weight: bold;
-    line-height: 1.5;
+  text-align: center;
+  padding: 15px;
+  border-radius: 12px;
+  line-height: 1;
+  font-size: 18px;
 }
 
 /* Стили для дней недели */
 .calendar-weekday {
-    background: none;
-    color: #000000;
-    font-size: 12px;
-    opacity: 0.29;
+  background: none;
+  color: #000000;
+  font-weight: 500;
+  opacity: 0.29;
+  line-height: 19px;
 }
 
 /* Стили для дней */
 .calendar-day {
-    background: #FFFDEA;
-    color: #000000;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: background 0.2s, border 0.2s;
-    opacity: 0,29;
+  background: #FFFFFF;
+  color: #000000;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background 0.2s, border 0.2s;
+  font-size: 26px;
 }
 
 .calendar-day:hover {
-    background: #FFFDEA;
-    border: 1px solid #2C1107;
+  background: #FFFFFF;
+  border: 1px solid #2C1107;
 }
 
 .calendar-day.today {
-    border: 1px solid #2C1107;
+  border: 2px solid #2C1107;
 }
 
 .calendar-day.selected {
-    background: #2C1107;
-    color: #FFFDEA;
-    border: 1px solid #2C1107;
+  background: #2C1107;
+  color: #FFFDEA;
+  border: 2px solid #2C1107;
 }
 
 .calendar-day:active {
-    background: #2C1107;
-    color: #FFFDEA;
-    border: 1px solid #2C1107;
+  background: #2C1107;
+  color: #FFFDEA;
+  border: 2px solid #2C1107;
 }
 
 /* Предотвращаем изменение размеров при наведении на дни */
@@ -220,40 +370,102 @@ h1 {
 .calendar-day:hover,
 .calendar-day.selected,
 .calendar-day:active {
-    width: 100%;
-    height: auto;
-    padding: 5px;
+  width: 100%;
+  height: auto;
+  padding: 15px;
 }
 
-.time-selection-container {
-  margin-bottom: 20px;
+/* Фон всплывающего окна */
+.time-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Основной контейнер всплывающего окна */
+.time-modal-container {
+  background: #ffffff;
+  border-radius: 8px;
+  border: 2px solid #ffffff;
+  padding: 20px;
+  width: 400px;
+  max-width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
   text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  scrollbar-width: thin;
+  scrollbar-color: #2c1107 #ffffff;
 }
 
-.time-selection-container label {
-  display: block;
+/* Заголовок */
+.time-modal-container h2 {
+  font-size: 1.5em;
+  color: #2c1107;
+  margin-bottom: 10px;
 }
 
-/* Общий стиль для времени выбора */
-#time-selection {
-  display: block;
-  margin-top: 10px;
-  padding: 5px;
-  border: 2px solid #2C1107;
+/* Колонки */
+.time-columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Колонка */
+.time-column {
+  flex: 1;
+}
+
+/* Опция */
+.time-option {
+  background: #fffdea;
+  border: 1px solid #2c1107;
+  padding: 10px;
+  margin-bottom: 5px;
   border-radius: 4px;
-  background: #FFFDEA;
-  font-size: 14px;
-  color: #2C1107;
-  width: auto;
-  max-width: 800px;
-  box-sizing: border-box;
-  margin-left: auto;
-  margin-right: auto;
+  font-size: 1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-/* Всплывающий эффект при наведении на время */
-#time-selection:hover {
-  border-color: #2C1107;
+/* Наведение */
+.time-option:hover {
+  background: #2c1107;
+  color: #fffdea;
+}
+
+/* Выбранный элемент */
+.time-option.selected {
+  background: #2c1107;
+  color: #fffdea;
+}
+
+/* Стили для полосы прокрутки внутри всплывающего окна */
+.time-modal-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.time-modal-container::-webkit-scrollbar-track {
+  background: #fffdea;
+  border-radius: 4px;
+}
+
+.time-modal-container::-webkit-scrollbar-thumb {
+  background: #2c1107;
+  border-radius: 4px;
+  border: 2px solid #fffdea;
+}
+
+.time-modal-container::-webkit-scrollbar-thumb:hover {
+  background: #085614;
 }
 
 /* Основной контейнер */

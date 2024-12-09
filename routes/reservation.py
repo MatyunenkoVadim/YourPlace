@@ -14,14 +14,13 @@ router = APIRouter()
 templates = Jinja2Templates(directory="resources/static")
 
 
-@router.get("/guests", response_class=HTMLResponse)
-async def select_guests(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-
-@router.get("/datetime", response_class=HTMLResponse)
-async def select_datetime(request: Request, guest_count: int):
-    return templates.TemplateResponse("index.html", {"request": request, "guest_count": guest_count})
+@router.get("/reservation", response_class=HTMLResponse)
+async def select_reservation(request: Request, guest_count: int = None, reservation_date: str = None):
+    return templates.TemplateResponse("index.html", {
+        "request": request,
+        "guest_count": guest_count,
+        "reservation_date": reservation_date
+    })
 
 
 @router.get("/table_selection", response_class=HTMLResponse)
