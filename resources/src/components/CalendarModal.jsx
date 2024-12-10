@@ -12,7 +12,7 @@ const CalendarModal = ({ selectedDate, setSelectedDate, onClose }) => {
   const createCalendarDays = () => {
     const daysInMonth = new Date(calendar.year, calendar.month + 1, 0).getDate();
     const firstDay = new Date(calendar.year, calendar.month, 1).getDay();
-    const emptyDays = (firstDay === 0 ? 6 : firstDay - 1); // Понедельник как первый день недели
+    const emptyDays = (firstDay === 0 ? 6 : firstDay - 1); 
 
     const calendarDays = [];
     for (let i = 0; i < emptyDays; i++) {

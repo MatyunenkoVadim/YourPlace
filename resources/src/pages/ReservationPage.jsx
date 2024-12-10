@@ -50,16 +50,24 @@ const ReservationPage = () => {
     return date.toLocaleDateString("ru-RU", options);
   };
 
-  const handleNextClick = () => {
-    if (guestCount && selectedTime && selectedDate) {
-      const dateParam = encodeURIComponent(selectedDate.toISOString());
-      navigate(
-        `/table_selection?guest_count=${guestCount}&reservation_date=${dateParam}&reservation_time=${selectedTime}`
-      );
-    } else {
-      alert("Пожалуйста, заполните все поля перед переходом к выбору стола.");
-    }
-  };
+    const handleNextClick = () => {
+      if (guestCount && selectedTime && selectedDate) {
+        const dateTime = new Date(selectedDate);
+        const timeParts = selectedTime.split(":");
+
+        const localOffset = dateTime.getTimezoneOffset();
+        dateTime.setHours(timeParts[0] - Math.floor(localOffset / 60));
+        dateTime.setMinutes(timeParts[1] - (localOffset % 60));
+
+        const dateParam = encodeURIComponent(dateTime.toISOString());
+
+        navigate(
+          `/table_selection?guest_count=${guestCount}&reservation_date=${dateParam}`
+        );
+      } else {
+        alert("Пожалуйста, заполните все поля перед переходом к выбору стола.");
+      }
+    };
 
   return (
     <div>
@@ -83,7 +91,6 @@ const ReservationPage = () => {
         </button>
       </div>
 
-      {/* Кнопка "Перейти к выбору стола" */}
       <div className="next-button-container">
         <button
           className="button"

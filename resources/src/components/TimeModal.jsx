@@ -9,9 +9,12 @@ const TimeModal = ({ selectedTime, setSelectedTime, onClose }) => {
     .slice(20);
 
   const handleTimeSelect = (time) => {
-    setSelectedTime(time);
-    onClose();
-  };
+      const timeParts = time.split(":");
+      const formattedTime = `${timeParts[0].padStart(2, "0")}:${timeParts[1].padStart(2, "0")}`;
+      setSelectedTime(formattedTime);
+      onClose();
+    };
+
 
   const hours = times.filter((time) => time.endsWith(":00"));
   const halfHours = times.filter((time) => time.endsWith(":30"));
