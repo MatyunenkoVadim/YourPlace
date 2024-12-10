@@ -12,17 +12,17 @@ body {
     display: flex;
     flex-direction: column;
     align-items: stretch;
-    justify-content: center; /* Центрируем контент по вертикали */
+    justify-content: center;
     margin: 0;
-    padding: 0;
     font-weight: 700;
     line-height: 30px;
     text-align: center;
-    font-family: Montserrat;
     font-size: 1em;
+    margin-top: 80px;
+    padding: 20px;
 }
 
-/* Стили для шапки */
+/* Шапка */
 .header {
     background-color: #2C1107;
     width: 100%;
@@ -31,22 +31,168 @@ body {
     justify-content: space-between;
     align-items: center;
     font-family: 'Cormorant Unicase';
-    font-weight: 500;
+    font-weight: 400;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
+/* Логотип */
+.header-logo {
+    display: flex;
+    align-items: center;
+    margin-left: -10px;
+    flex-shrink: 0;
+}
 
-.header-title {
+.logo {
+    width: 120px;
+    height: auto;
+    transition: all 0.3s ease;
+}
+
+/* Скрытое меню */
+.nav-links {
+    display: flex;
+    gap: 80px;
+    transition: max-height 0.3s ease;
+    margin: auto;
+    justify-content: center;
+    flex-grow: 1;
+    flex-wrap: wrap;
+}
+
+/* Навигационные ссылки */
+.nav-link {
+    text-decoration: none;
+    text-align: center;
     font-size: 1.5em;
     color: #FFFDEA;
-    font-weight: bold;
+    font-weight: 400;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
+.nav-link:hover {
+    transform: scale(1.1);
+}
+
+/* Кнопка гамбургер */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: #FFFDEA;
+    font-size: 2em;
+    cursor: pointer;
+    position: absolute;
+    right: 20px;
+}
+
+/* Кнопка для входа */
 .login-button {
     background-color: transparent;
     color: #FFFDEA;
-    border: none;
+    border: 2px solid #FFFDEA;
     cursor: pointer;
     font-size: 1em;
+    padding: 5px 15px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    position: absolute;
+    right: 20px; /* Это добавляет кнопку справа */
+    top: 50%; /* Центрирует кнопку по вертикали */
+    transform: translateY(-50%); /* Центрирует кнопку по вертикали */
+}
+
+.login-button:hover {
+    background-color: #FFFDEA;
+    color: #2C1107;
+}
+
+/* Медиазапросы для адаптивности */
+@media (max-width: 1024px) {
+    .logo {
+        width: 100px;
+    }
+    .nav-links {
+        gap: 30px;
+    }
+    .nav-link {
+        font-size: 1.2em;
+    }
+    .login-button {
+        font-size: 0.9em;
+    }
+}
+
+/* Для мобильных устройств */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        position: absolute;
+        top: 70px;
+        right: 0;
+        background-color: #2C1107;
+        width: 100%;
+        padding: 10px;
+        max-height: 0;
+        overflow: hidden;
+        visibility: hidden;
+    }
+
+    .nav-links.nav-open {
+        max-height: 300px;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    .nav-link {
+        font-size: 1em;
+        text-align: center;
+    }
+
+    .login-button {
+        display: none;
+    }
+
+    .mobile-login-button {
+        display: block;
+        background-color: transparent;
+        color: #FFFDEA;
+        border: 2px solid #FFFDEA;
+        cursor: pointer;
+        font-size: 1em;
+        padding: 5px 15px;
+        border-radius: 5px;
+        transition: all 0.3s ease;
+    }
+
+    .mobile-login-button:hover {
+        background-color: #FFFDEA;
+        color: #2C1107;
+    }
+}
+
+@media (max-width: 480px) {
+    .logo {
+        width: 70px;
+    }
+    .nav-link {
+        font-size: 0.8em;
+    }
+    .login-button {
+        font-size: 0.7em;
+        padding: 5px;
+    }
 }
 
 .next-button-container {
