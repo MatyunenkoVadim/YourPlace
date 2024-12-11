@@ -12,7 +12,7 @@ const getGuestLabel = (count) => {
 };
 
 const ReservationPage = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
   const [selectedTime, setSelectedTime] = useState("");
   const [guestCount, setGuestCount] = useState(null);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
@@ -46,28 +46,29 @@ const ReservationPage = () => {
   };
 
   const formatDate = (date) => {
+    if (!date) return "Выберите дату";
     const options = { year: "numeric", month: "long", day: "numeric" };
     return date.toLocaleDateString("ru-RU", options);
   };
 
-    const handleNextClick = () => {
-      if (guestCount && selectedTime && selectedDate) {
-        const dateTime = new Date(selectedDate);
-        const timeParts = selectedTime.split(":");
+  const handleNextClick = () => {
+    if (guestCount && selectedTime && selectedDate) {
+      const dateTime = new Date(selectedDate);
+      const timeParts = selectedTime.split(":");
 
-        const localOffset = dateTime.getTimezoneOffset();
-        dateTime.setHours(timeParts[0] - Math.floor(localOffset / 60));
-        dateTime.setMinutes(timeParts[1] - (localOffset % 60));
+      const localOffset = dateTime.getTimezoneOffset();
+      dateTime.setHours(timeParts[0] - Math.floor(localOffset / 60));
+      dateTime.setMinutes(timeParts[1] - (localOffset % 60));
 
-        const dateParam = encodeURIComponent(dateTime.toISOString());
+      const dateParam = encodeURIComponent(dateTime.toISOString());
 
-        navigate(
-          `/table_selection?guest_count=${guestCount}&reservation_date=${dateParam}`
-        );
-      } else {
-        alert("Пожалуйста, заполните все поля перед переходом к выбору стола.");
-      }
-    };
+      navigate(
+        `/table_selection?guest_count=${guestCount}&reservation_date=${dateParam}`
+      );
+    } else {
+      alert("Пожалуйста, заполните все поля перед переходом к выбору стола.");
+    }
+  };
 
   return (
     <div>
@@ -103,7 +104,7 @@ const ReservationPage = () => {
 
       {isCalendarOpen && (
         <CalendarModal
-          selectedDate={selectedDate}
+          selectedDate={selectedDate || new Date()}
           setSelectedDate={setSelectedDate}
           onClose={handleCloseCalendar}
         />

@@ -358,6 +358,15 @@ h2 {
   margin-bottom: 20px;
 }
 
+h3 {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 30px;
+  line-height: 44px;
+  color: #000000;
+  margin-bottom: 20px;
+}
+
 /* Контейнер для выбора количества гостей */
 .guest-count-container {
     display: grid;
