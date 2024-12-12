@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage.jsx";
 import TableSelectionPage from "./pages/TableSelectionPage.jsx";
 import ResultPage from "./pages/ResultPage.jsx";
 import ReservationPage from "./pages/ReservationPage.jsx";
+import LoginPage from "./pages/LoginPage.jsx"
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
@@ -15,6 +16,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/reservation" element={<ReservationPage />} />
         <Route path="/table_selection" element={<TableSelectionPage />} />
         <Route path="/result" element={<ResultPage />} />
+        <Route path="/users/login" element={<LoginPage />} />
       </Routes>
     </Router>
   </StrictMode>
