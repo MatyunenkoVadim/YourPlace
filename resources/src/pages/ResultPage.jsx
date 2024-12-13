@@ -46,7 +46,6 @@ const ResultPage = () => {
         },
       });
 
-      // Дополнительная логика, если нужно, в случае успешного бронирования
       console.log("Reservation successful:", response.data);
     } catch (error) {
       console.error("Error during reservation:", error);

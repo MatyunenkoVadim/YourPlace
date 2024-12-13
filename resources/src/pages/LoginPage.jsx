@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios";
+import axios from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -32,7 +32,7 @@ const LoginPage = () => {
 
       localStorage.setItem("access_token", access_token);
 
-      navigate("/reservations");
+      navigate("/");
     } catch (error) {
       setError("Ошибка входа. Проверьте телефон или пароль.");
     }
