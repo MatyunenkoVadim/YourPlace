@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import { fetchToken, setToken } from "./components/Auth.jsx";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -20,6 +21,13 @@ const LoginPage = () => {
       const response = await axios.post("http://localhost:8000/api/v1/auth/login", {
         username: email,
         password,
+      })
+      .then(function (response) {
+          console.log(response.data.token, "response.data.token");
+          if (response.data.token) {
+            setToken(response.data.token);
+            navigate("/users/me");
+          }
       });
     } catch (error) {
       setError("Ошибка входа. Проверьте email или пароль.");
