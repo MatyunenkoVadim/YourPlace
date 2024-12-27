@@ -21,9 +21,11 @@ createRoot(document.getElementById("root")).render(
         <Route path="/result" element={<ResultPage />} />
         <Route path="/users/login" element={<LoginPage />} />
         <Route path="/users/register" element={<RegistrationPage />} />
-        <Route path="/users/me" element={
+        <Route
+          path="/users/me"
+          element={
             <RequireToken>
-                <Profile />
+              <ProfilePage />
             </RequireToken>
           }
         />
