@@ -1,6 +1,8 @@
 from contextlib import asynccontextmanager
+from pathlib import Path
 
 from fastapi import FastAPI
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
@@ -49,7 +51,9 @@ app.add_middleware(
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-# TODO: Delete router_users
-# app.include_router(router_users)
+@app.get("/{full_path:path}")
+async def serve_react_app(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
+
 app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
 app.include_router(router_reservation)

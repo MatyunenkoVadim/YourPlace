@@ -12,7 +12,6 @@ import { RequireToken } from "./components/Auth.jsx";
 import "./index.css";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -31,5 +30,4 @@ createRoot(document.getElementById("root")).render(
         />
       </Routes>
     </Router>
-  </StrictMode>
 );
