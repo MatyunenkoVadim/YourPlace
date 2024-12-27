@@ -3,20 +3,13 @@ import axios from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
-  const [phone, setPhone] = useState("+7");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const MAX_LENGTH = 10;
-
-  const handlePhoneChange = (e) => {
-    const value = e.target.value;
-
-    const digits = value.replace(/\D/g, "").slice(1);
-    if (digits.length <= MAX_LENGTH) {
-      setPhone("+7" + digits);
-    }
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handleLogin = async (e) => {
@@ -24,17 +17,12 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const response = await axios.post("http://localhost:8000/users/login", {
-        username: phone.replace(/\D/g, ""),
+      const response = await axios.post("http://localhost:8000/api/v1/auth/login", {
+        username: email,
         password,
       });
-      const { access_token } = response.data;
-
-      localStorage.setItem("access_token", access_token);
-
-      navigate("/");
     } catch (error) {
-      setError("Ошибка входа. Проверьте телефон или пароль.");
+      setError("Ошибка входа. Проверьте email или пароль.");
     }
   };
 
@@ -45,17 +33,16 @@ const LoginPage = () => {
       <form className="login-form" onSubmit={handleLogin}>
         <div className="form-group">
           <div className="label-wrapper">
-            <label htmlFor="phone" className="floating-label">
-              Номер телефона
+            <label htmlFor="email" className="floating-label">
+              Email
             </label>
           </div>
           <input
-            type="tel"
-            id="phone"
-            value={phone}
-            onChange={handlePhoneChange}
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
             required
-            maxLength="13"
           />
         </div>
 
