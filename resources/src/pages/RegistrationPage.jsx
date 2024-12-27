@@ -1,24 +1,14 @@
 import React, { useState } from "react";
 import axios from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
+import { fetchToken, setToken } from "../components/Auth.jsx";
 
 const RegistrationPage = () => {
   const [username, setUsername] = useState("");
-  const [phone, setPhone] = useState("+7");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-
-  const MAX_LENGTH = 10;
-
-  const handlePhoneChange = (e) => {
-    const value = e.target.value;
-    const digits = value.replace(/\D/g, "").slice(1);
-    if (digits.length <= MAX_LENGTH) {
-      setPhone("+7" + digits);
-    }
-  };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -30,13 +20,17 @@ const RegistrationPage = () => {
     }
 
     try {
-      await axios.post("/users/register", {
-        username,
-        phone: phone.replace(/\D/g, ""),
+      const response = await axios.post("http://localhost:8000/api/v1/auth/register", {
+        username: email,
         password,
+      })
+      .then(function (response) {
+          console.log(response.data.token, "response.data.token");
+          if (response.data.token) {
+            setToken(response.data.token);
+            navigate("/users/me");
+          }
       });
-
-      navigate("/");
     } catch (err) {
       if (err.response && err.response.data.detail) {
         setError(err.response.data.detail);
@@ -54,31 +48,15 @@ const RegistrationPage = () => {
         <div className="form-group">
           <div className="label-wrapper">
             <label htmlFor="username" className="floating-label">
-              Имя пользователя
+              Имя пользователя (Email)
             </label>
           </div>
           <input
-            type="text"
+            type="email"
             id="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-          />
-        </div>
-
-        <div className="form-group">
-          <div className="label-wrapper">
-            <label htmlFor="phone" className="floating-label">
-              Телефон
-            </label>
-          </div>
-          <input
-            type="tel"
-            id="phone"
-            value={phone}
-            onChange={handlePhoneChange}
-            required
-            maxLength="13"
           />
         </div>
 

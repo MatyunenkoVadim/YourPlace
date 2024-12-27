@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "../axiosConfig";
 import { useNavigate } from "react-router-dom";
-import { fetchToken, setToken } from "./components/Auth.jsx";
+import { fetchToken, setToken } from "../components/Auth.jsx";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
