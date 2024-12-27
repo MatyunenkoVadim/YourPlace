@@ -1,8 +1,8 @@
-import { useLocation,Navigate } from "react-router-dom"
+import { useLocation, Navigate } from "react-router-dom"
 
 export const setToken = (token)=>{
 
-    localStorage.setItem('temitope', token)// make up your own token
+    localStorage.setItem('temitope', token)
 }
 
 export const fetchToken = (token)=>{
