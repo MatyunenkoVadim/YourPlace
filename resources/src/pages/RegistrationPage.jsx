@@ -20,7 +20,7 @@ const RegistrationPage = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:8000/api/v1/auth/register", {
+      const response = await axios.post("/api/v1/auth/register", {
         username: email,
         password,
       })
@@ -28,7 +28,7 @@ const RegistrationPage = () => {
           console.log(response.data.token, "response.data.token");
           if (response.data.token) {
             setToken(response.data.token);
-            navigate("/users/me");
+            navigate("/api/v1/users/me");
           }
       });
     } catch (err) {

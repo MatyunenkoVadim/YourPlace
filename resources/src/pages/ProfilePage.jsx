@@ -11,7 +11,7 @@ export default function ProfilePage() {
     const fetchUserData = async () => {
       const auth = localStorage.getItem("temitope");
       try {
-        const response = await axios.get("http://localhost:8000/api/v1/users/me", {
+        const response = await axios.get("/api/v1/users/me", {
           headers: {
             Authorization: `Bearer ${auth}`,
           },
