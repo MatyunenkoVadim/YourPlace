@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { fetchToken, setToken } from "../components/Auth.jsx";
 
 const RegistrationPage = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState(null);
@@ -20,17 +20,25 @@ const RegistrationPage = () => {
     }
 
     try {
-      const response = await axios.post("/api/v1/auth/register", {
-        username: email,
+      const responseReg = await axios.post("/api/v1/auth/register", {
+        email,
         password,
-      })
-      .then(function (response) {
-          console.log(response.data.token, "response.data.token");
-          if (response.data.token) {
-            setToken(response.data.token);
-            navigate("/api/v1/users/me");
-          }
       });
+      if (responseReg.data) {
+          const params = new URLSearchParams();
+          params.append("username", email);
+          params.append("password", password);
+          const responseLog = await axios.post("/api/v1/auth/login", params, {
+              headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+              },
+          });
+          console.log(username, "username");
+          console.log(responseLog.data, "response");
+          setToken(responseLog.data.access_token);
+          console.log(responseLog.data.access_token);
+          navigate("/api/v1/users/me");
+      }
     } catch (err) {
       if (err.response && err.response.data.detail) {
         setError(err.response.data.detail);
@@ -47,15 +55,15 @@ const RegistrationPage = () => {
       <form className="login-form" onSubmit={handleRegister}>
         <div className="form-group">
           <div className="label-wrapper">
-            <label htmlFor="username" className="floating-label">
+            <label htmlFor="email" className="floating-label">
               Имя пользователя (Email)
             </label>
           </div>
           <input
             type="email"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </div>
