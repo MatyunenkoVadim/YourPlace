@@ -18,17 +18,18 @@ const LoginPage = () => {
     setError(null);
 
     try {
-      const response = await axios.post("/api/v1/auth/login", {
-        username: email,
-        password,
-      })
-      .then(function (response) {
-          console.log(response.data.token, "response.data.token");
-          if (response.data.token) {
-            setToken(response.data.token);
-            navigate("/users/me");
-          }
+      const params = new URLSearchParams();
+      params.append("username", email);
+      params.append("password", password);
+      const response = await axios.post("/api/v1/auth/login", params, {
+          headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+          },
       });
+      if (response.data.access_token) {
+          setToken(response.data.access_token);
+          navigate("/api/v1/users/me");
+      }
     } catch (error) {
       setError("Ошибка входа. Проверьте email или пароль.");
     }

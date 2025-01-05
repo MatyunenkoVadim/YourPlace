@@ -21,7 +21,7 @@ export default function ProfilePage() {
         setError("Failed to load user data");
       }
     };
-
+    console.log(userData);
     fetchUserData();
   }, []);
 

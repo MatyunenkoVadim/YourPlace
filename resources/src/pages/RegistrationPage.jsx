@@ -33,10 +33,7 @@ const RegistrationPage = () => {
                 "Content-Type": "application/x-www-form-urlencoded",
               },
           });
-          console.log(username, "username");
-          console.log(responseLog.data, "response");
           setToken(responseLog.data.access_token);
-          console.log(responseLog.data.access_token);
           navigate("/api/v1/users/me");
       }
     } catch (err) {
