@@ -51,7 +51,7 @@ export default function ProfilePage() {
               </div>
             </>
           ) : (
-            <p>Loading...</p>
+            <p>Загрузка...</p>
           )}
         </div>
         <div className="profile-image">
