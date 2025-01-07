@@ -21,7 +21,7 @@ createRoot(document.getElementById("root")).render(
         <Route path="/users/login" element={<LoginPage />} />
         <Route path="/users/register" element={<RegistrationPage />} />
         <Route
-          path="/users/me"
+          path="/api/v1/users/me"
           element={
             <RequireToken>
               <ProfilePage />

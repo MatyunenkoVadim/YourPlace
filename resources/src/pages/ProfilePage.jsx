@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "../axiosConfig";
+import Header from "../components/Header";
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -21,7 +22,6 @@ export default function ProfilePage() {
         setError("Failed to load user data");
       }
     };
-    console.log(userData);
     fetchUserData();
   }, []);
 
@@ -31,22 +31,38 @@ export default function ProfilePage() {
   };
 
   return (
-    <>
-      <div style={{ marginTop: 20, minHeight: 700 }}>
-        <h1>Profile page</h1>
-        {error ? (
-          <p style={{ color: "red" }}>{error}</p>
-        ) : userData ? (
-          <>
-            <p>Hello {userData.name}, welcome to your profile page</p>
-            <p>Email: {userData.email}</p>
-          </>
-        ) : (
-          <p>Loading...</p>
-        )}
-
-        <button onClick={signOut}>sign out</button>
+    <div>
+      <Header />
+      <div className="profile-container">
+        <div className="profile-info">
+          <h1 className="profile-title">Мой профиль</h1>
+          {error ? (
+            <p style={{ color: "red" }}>{error}</p>
+          ) : userData ? (
+            <>
+              <div className="profile-data">
+                <p className="profile-name">{userData.name}Пример текста</p>
+              </div>
+              <div className="profile-data">
+                <p className="profile-email">{userData.email}Пример текста</p>
+              </div>
+              <div className="profile-data">
+                <p className="profile-phone">{userData.phone}Пример текста</p>
+              </div>
+            </>
+          ) : (
+            <p>Loading...</p>
+          )}
+        </div>
+        <div className="profile-image">
+          {userData && userData.image ? (
+            <img src={userData.image} alt="Profile" className="profile-pic" />
+          ) : (
+            <div className="default-profile-pic"></div>
+          )}
+        </div>
       </div>
-    </>
+      <button onClick={signOut} className="sign-out-button">Выйти</button>
+    </div>
   );
 }
