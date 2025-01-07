@@ -13,6 +13,7 @@ from .mixins.id_int_pk import IdIntPkMixin
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
 
+
 class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
     __tablename__ = "users"
 

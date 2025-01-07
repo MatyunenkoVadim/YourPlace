@@ -51,9 +51,11 @@ app.add_middleware(
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
+
 @app.get("/{full_path:path}")
 async def serve_react_app(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
+
 
 app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
 app.include_router(router_reservation)
