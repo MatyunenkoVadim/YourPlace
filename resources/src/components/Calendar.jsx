@@ -14,7 +14,6 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
     const lastDateOfMonth = new Date(year, month + 1, 0).getDate();
     const daysArray = [];
 
-    // Add empty cells for the previous month
     for (let i = 0; i < (firstDay || 7) - 1; i++) {
       daysArray.push(null);
     }
@@ -28,12 +27,50 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
   };
 
   const handlePrevMonth = () => {
-    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)));
-  };
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
 
-  const handleNextMonth = () => {
+  if (
+    currentDate.getFullYear() > currentYear ||
+    (currentDate.getFullYear() === currentYear && currentDate.getMonth() > currentMonth)
+  ) {
+    setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() - 1)));
+  }
+};
+
+const handleNextMonth = () => {
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
+
+  if (
+    currentDate.getFullYear() < maxDate.getFullYear() ||
+    (currentDate.getFullYear() === maxDate.getFullYear() && currentDate.getMonth() < maxDate.getMonth())
+  ) {
     setCurrentDate(new Date(currentDate.setMonth(currentDate.getMonth() + 1)));
-  };
+  }
+};
+
+const isPrevDisabled = () => {
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+
+  return (
+    currentDate.getFullYear() === currentYear && currentDate.getMonth() === currentMonth
+  );
+};
+
+const isNextDisabled = () => {
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
+
+  return (
+    currentDate.getFullYear() === maxDate.getFullYear() && currentDate.getMonth() === maxDate.getMonth()
+  );
+};
 
   const handleDayClick = (day) => {
     if (day !== null) {
@@ -56,9 +93,21 @@ const Calendar = ({ selectedDate, setSelectedDate }) => {
     return (
       <div className="calendar">
         <div className="calendar-header">
-          <button onClick={handlePrevMonth}>&#8249;</button>
+          <button
+            onClick={handlePrevMonth}
+            disabled={isPrevDisabled()}
+            className={`calendar-nav ${isPrevDisabled() ? "disabled" : ""}`}
+          >
+            &#8249;
+          </button>
           <span>{`${monthName} ${year}`}</span>
-          <button onClick={handleNextMonth}>&#8250;</button>
+          <button
+            onClick={handleNextMonth}
+            disabled={isNextDisabled()}
+            className={`calendar-nav ${isNextDisabled() ? "disabled" : ""}`}
+          >
+            &#8250;
+          </button>
         </div>
         <div className="calendar-weekdays">
           {daysOfWeek.map((day, index) => (

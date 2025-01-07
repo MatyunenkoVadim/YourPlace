@@ -10,66 +10,122 @@ const CalendarModal = ({ selectedDate, setSelectedDate, onClose }) => {
   ];
 
   const createCalendarDays = () => {
-    const daysInMonth = new Date(calendar.year, calendar.month + 1, 0).getDate();
-    const firstDay = new Date(calendar.year, calendar.month, 1).getDay();
-    const emptyDays = (firstDay === 0 ? 6 : firstDay - 1); 
+  const daysInMonth = new Date(calendar.year, calendar.month + 1, 0).getDate();
+  const firstDay = new Date(calendar.year, calendar.month, 1).getDay();
+  const emptyDays = (firstDay === 0 ? 6 : firstDay - 1);
 
-    const calendarDays = [];
-    for (let i = 0; i < emptyDays; i++) {
-      calendarDays.push(<div className="calendar-day empty" key={`empty-${i}`} />);
-    }
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
 
-    for (let day = 1; day <= daysInMonth; day++) {
-      const date = new Date(calendar.year, calendar.month, day);
-      const isToday = date.toDateString() === new Date().toDateString();
-      const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+  const todayWithoutTime = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-      calendarDays.push(
-        <div
-          className={`calendar-day ${isToday ? "today" : ""} ${isSelected ? "selected" : ""}`}
-          key={day}
-          onClick={() => {
+  const calendarDays = [];
+  for (let i = 0; i < emptyDays; i++) {
+    calendarDays.push(<div className="calendar-day empty" key={`empty-${i}`} />);
+  }
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(calendar.year, calendar.month, day);
+    const isToday = date.getTime() === todayWithoutTime.getTime();
+    const isSelected = selectedDate && date.toDateString() === selectedDate.toDateString();
+    const isPast = date < todayWithoutTime;
+    const isOutOfRange = date > maxDate;
+
+    calendarDays.push(
+      <div
+        className={`calendar-day
+          ${isToday ? "today" : ""}
+          ${isSelected ? "selected" : ""}
+          ${isPast || isOutOfRange ? "disabled" : ""}`}
+        key={day}
+        onClick={() => {
+          if (!isPast && !isOutOfRange) {
             setSelectedDate(date);
             onClose();
-          }}
-        >
-          {day}
-        </div>
-      );
-    }
+          }
+        }}
+      >
+        {day}
+      </div>
+    );
+  }
 
-    return calendarDays;
-  };
+  return calendarDays;
+};
+
+
 
   const handlePrevMonth = () => {
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+
+  if (
+    calendar.year > currentYear ||
+    (calendar.year === currentYear && calendar.month > currentMonth)
+  ) {
     setCalendar((prevState) => ({
       year: prevState.month === 0 ? prevState.year - 1 : prevState.year,
       month: prevState.month === 0 ? 11 : prevState.month - 1,
     }));
-  };
+  }
+};
 
-  const handleNextMonth = () => {
+const handleNextMonth = () => {
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
+
+  if (
+    calendar.year < maxDate.getFullYear() ||
+    (calendar.year === maxDate.getFullYear() && calendar.month < maxDate.getMonth())
+  ) {
     setCalendar((prevState) => ({
       year: prevState.month === 11 ? prevState.year + 1 : prevState.year,
       month: prevState.month === 11 ? 0 : prevState.month + 1,
     }));
-  };
+  }
+};
+
+const isPrevDisabled = () => {
+  const today = new Date();
+  const currentMonth = today.getMonth();
+  const currentYear = today.getFullYear();
+
+  return calendar.year === currentYear && calendar.month === currentMonth;
+};
+
+const isNextDisabled = () => {
+  const today = new Date();
+  const maxDate = new Date();
+  maxDate.setDate(today.getDate() + 30);
+
+  return calendar.year === maxDate.getFullYear() && calendar.month === maxDate.getMonth();
+};
 
   return (
     <div className="calendar-modal">
       <div className="calendar-container">
         <div className="calendar-header">
-          <button onClick={handlePrevMonth} className="calendar-nav">
+          <button
+            onClick={handlePrevMonth}
+            disabled={isPrevDisabled()}
+            className={`calendar-nav ${isPrevDisabled() ? "disabled" : ""}`}
+          >
             &#8249;
           </button>
           <div className="calendar-month">
             {monthNames[calendar.month]} {calendar.year}
           </div>
-          <button onClick={handleNextMonth} className="calendar-nav">
+          <button
+            onClick={handleNextMonth}
+            disabled={isNextDisabled()}
+            className={`calendar-nav ${isNextDisabled() ? "disabled" : ""}`}
+          >
             &#8250;
           </button>
         </div>
-
         <div className="calendar-days">
           {weekdays.map((day) => (
             <div key={day} className="calendar-weekday">{day}</div>

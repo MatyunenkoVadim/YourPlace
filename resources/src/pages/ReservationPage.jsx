@@ -110,12 +110,13 @@ const ReservationPage = () => {
         />
       )}
       {isTimeModalOpen && (
-        <TimeModal
-          selectedTime={selectedTime}
-          setSelectedTime={setSelectedTime}
-          onClose={handleCloseTimeModal}
-        />
-      )}
+          <TimeModal
+            selectedTime={selectedTime}
+            setSelectedTime={setSelectedTime}
+            onClose={handleCloseTimeModal}
+            selectedDate={selectedDate}
+          />
+        )}
       {isGuestsModalOpen && (
         <GuestsModal
           guestCount={guestCount}
