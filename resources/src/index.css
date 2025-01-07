@@ -375,31 +375,32 @@ h3 {
     align-items: center;
     gap: 10px;
     margin: 0 auto;
-    max-width: 400px;
+    max-width: 100%;
+    padding: 0 10px;
 }
 
 /* Стиль для каждой цифры */
 .guest-option {
-    box-sizing: border-box;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    gap: 10px;
-    width: 100%;
-    height: 64.76px;
-    background: #FFFDEA;
-    border: 2px solid #2C1107;
-    border-radius: 8px;
-    font-family: 'Montserrat', sans-serif;
-    font-style: normal;
-    font-weight: 500;
-    font-size: 36px;
-    line-height: 44px;
-    color: #2C1107;
-    text-align: center;
-    cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  gap: 10px;
+  width: 100%;
+  height: auto;
+  background: #FFFDEA;
+  border: 2px solid #2C1107;
+  border-radius: 8px;
+  font-family: 'Montserrat', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  color: #2C1107;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
 }
 
 /* Стиль для выделенного элемента */
@@ -411,6 +412,28 @@ h3 {
 .guest-option:hover {
     background: #2C1107;
     color: #FFFDEA;
+}
+
+@media (max-width: 768px) {
+  .guest-option {
+    font-size: 1.5em;
+    padding: 10px;
+  }
+
+  .h2 {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .guest-option {
+    font-size: 1.5em;
+    padding: 8px;
+  }
+
+  .h2 {
+    font-size: 0.2em;
+  }
 }
 
 /* Общие стили для календаря */

@@ -99,8 +99,20 @@ const TableSelectionPage = () => {
         <input type="hidden" name="guest_count" value={guestCount || ''} />
         <input type="hidden" name="reservation_date" value={reservationDate || ''} />
         <input type="hidden" name="table_number" value={selectedTable || ''} />
-        <button type="submit" className="button">Забронировать</button>
       </form>
+
+      <button
+        type="button"
+        className={`button ${selectedTable ? '' : 'disabled'}`}
+        onClick={() => {
+          if (selectedTable) {
+            document.getElementById('reservationForm').submit();
+          }
+        }}
+        disabled={!selectedTable}
+      >
+        Забронировать
+      </button>
     </div>
   );
 };
