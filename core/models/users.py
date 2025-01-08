@@ -20,6 +20,7 @@ class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
 
     phone: Mapped[str | None] = mapped_column(unique=True)
     fullname: Mapped[str | None]
+    is_admin: Mapped[bool] = mapped_column(default=False)
 
     visitor: Mapped[list["Visitor"]] = relationship(back_populates="user")
 
