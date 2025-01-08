@@ -1,0 +1,14 @@
+fastapi~=0.115.4
+jinja2
+asyncpg
+sqlalchemy~=2.0.36
+databases
+uvicorn
+starlette~=0.41.2
+config~=0.5.1
+pydantic~=2.9.2
+python-multipart
+aiosqlite
+pytest~=8.3.3
+poetry
+black
