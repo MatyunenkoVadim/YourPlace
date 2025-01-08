@@ -6,14 +6,14 @@
 
 /* Общие стили */
 body {
-    background-color: #FFFDEA;
+    background-color: #FFFBF8;
     color: #2C1107;
     font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: stretch;
     justify-content: center;
-    margin: 0;
+    margin: 12px;
     font-weight: 700;
     line-height: 30px;
     text-align: center;
@@ -24,7 +24,7 @@ body {
 
 /* Шапка */
 .header {
-    background-color: #2C1107;
+    background-color: #FFFBF8;
     width: 100%;
     padding: 10px 20px;
     display: flex;
@@ -57,12 +57,13 @@ body {
 /* Скрытое меню */
 .nav-links {
     display: flex;
-    gap: 80px;
+    gap: 120px;
     transition: max-height 0.3s ease;
     margin: auto;
     justify-content: center;
     flex-grow: 1;
     flex-wrap: wrap;
+    margin-left: -100px;
 }
 
 /* Навигационные ссылки */
@@ -70,22 +71,29 @@ body {
     text-decoration: none;
     text-align: center;
     font-size: 1.5em;
-    color: #FFFDEA;
-    font-weight: 400;
+    font-family: 'Cormorant Unicase';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    color: #000000;
     transition: all 0.3s ease;
     white-space: nowrap;
 }
 
 .nav-link:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 2px;
     transform: scale(1.1);
 }
 
 /* Кнопка гамбургер */
 .menu-toggle {
     display: none;
-    background: transparent;
+    background: #FFFBF8;
     border: none;
-    color: #FFFDEA;
+    color: #000000;
     font-size: 2em;
     cursor: pointer;
     position: absolute;
@@ -95,22 +103,31 @@ body {
 /* Кнопка для входа */
 .log-button {
     background-color: transparent;
-    color: #FFFDEA;
-    border: 2px solid #FFFDEA;
+    color: #000000;
     cursor: pointer;
-    font-size: 1em;
+    font-family: 'Cormorant Unicase';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 28px;
+    line-height: 34px;
+    text-align: center;
     padding: 5px 15px;
-    border-radius: 5px;
     transition: all 0.3s ease;
     position: absolute;
-    right: 20px; /* Это добавляет кнопку справа */
-    top: 50%; /* Центрирует кнопку по вертикали */
-    transform: translateY(-50%); /* Центрирует кнопку по вертикали */
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+    margin-right: 12px;
 }
 
 .log-button:hover {
-    background-color: #FFFDEA;
     color: #2C1107;
+    text-decoration: underline;
+}
+
+.mobile-login-button {
+    display: none;
 }
 
 /* Медиазапросы для адаптивности */
@@ -119,13 +136,13 @@ body {
         width: 100px;
     }
     .nav-links {
-        gap: 30px;
+        gap: 50px;
     }
     .nav-link {
         font-size: 1.2em;
     }
     .log-button {
-        font-size: 0.9em;
+        font-size: 1.2em;
     }
 }
 
@@ -136,12 +153,13 @@ body {
     }
 
     .nav-links {
+        display: none;
         flex-direction: column;
         gap: 10px;
         position: absolute;
         top: 70px;
         right: 0;
-        background-color: #2C1107;
+        background-color: #FFFBF8;
         width: 100%;
         padding: 10px;
         max-height: 0;
@@ -153,6 +171,8 @@ body {
         max-height: 300px;
         visibility: visible;
         transform: translateY(0);
+        display: flex;
+        opacity: 1;
     }
 
     .nav-link {
@@ -161,24 +181,15 @@ body {
     }
 
     .log-button {
+        position: static;
+        margin: 10px auto 0;
+        display: block;
+        font-size: 1em;
         display: none;
     }
 
     .mobile-login-button {
         display: block;
-        background-color: transparent;
-        color: #FFFDEA;
-        border: 2px solid #FFFDEA;
-        cursor: pointer;
-        font-size: 1em;
-        padding: 5px 15px;
-        border-radius: 5px;
-        transition: all 0.3s ease;
-    }
-
-    .mobile-login-button:hover {
-        background-color: #FFFDEA;
-        color: #2C1107;
     }
 }
 
@@ -195,9 +206,146 @@ body {
     }
 }
 
+.home-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #FFFDEA;
+    text-align: center;
+    width: 1440px;
+    height: 900px;
+    max-width: 100%;
+    max-height: 100vh;
+    margin: auto;
+    overflow: hidden;
+    border-radius: 33px;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.background-image-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 33px;
+    overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.welcome-text {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 5px;
+    width: 753px;
+    height: 353px;
+    left: 73px;
+    top: 134px;
+}
+
+.welcome-text h1 {
+    width: 753px;
+    height: 93px;
+    font-family: 'Cormorant Unicase';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 76.7839px;
+    line-height: 93px;
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+}
+
+.welcome-text-paragraphs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0;
+    gap: 8px;
+    width: 753px;
+    height: 248px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+}
+
+.welcome-text-paragraphs p {
+    width: 100%;
+    text-align: left;
+}
+
+.button-home-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+    gap: 10px;
+    width: 346px;
+    height: 79px;
+    left: 5px;
+    top: 429px;
+}
+
+.button-home {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 15px 22px;
+    gap: 19.26px;
+    width: 346px;
+    height: 59px;
+    border: 1px solid #FFFFFF;
+    border-radius: 12px;
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-align: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.button-home:hover {
+    background-color: #FFFFFF;
+    color: #000000;
+}
+
+.logo-container {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15.2007px 3.04014px 15.2007px 0;
+    width: 366.61px;
+    height: 248.8px;
+    left: 895px;
+    top: 172px;
+}
+
+.logo-part {
+    width: 367px;
+    height: 249px;
+    background-size: auto;
+    margin: -51.1295px 0;
+}
+
 .next-button-container {
   position: fixed;
-  bottom: 20px; /* Отступ от нижнего края */
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;

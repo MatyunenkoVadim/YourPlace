@@ -20,13 +20,13 @@ const Header = () => {
       </button>
 
       <nav className={`nav-links ${menuOpen ? "nav-open" : ""}`}>
-      <a href="/" className="nav-link">Главная</a>
-      <a href="/reservations" className="nav-link">Мои бронирования</a>
-      <a href="/contacts" className="nav-link">Контакты</a>
-      <a href="/users/login" className="mobile-login-button">Войти</a>
-    </nav>
+        <a href="/" className="nav-link">Главная</a>
+        <a href="/reservations" className="nav-link">Мои бронирования</a>
+        <a href="/contacts" className="nav-link">Контакты</a>
+        <a href="/users/login" className="nav-link mobile-login-button">Войти</a>
+      </nav>
 
-    <a href="/users/login" className="log-button">Войти</a>
+      <a href="/users/login" className="log-button">Войти</a>
     </header>
   );
 };
