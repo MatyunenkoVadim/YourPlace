@@ -1,0 +1,19 @@
+[MAIN]
+ignore=
+          C0115, # Missing class docstring
+          C0116, # Missing function or method docstring
+          W0703, # Catching too general exception
+          R0903, # Too few public methods
+
+[MISCELLANEOUS]
+ignored-modules=cv2,numpy,os,time
+[FORMAT]
+max-line-length=90
+[DESIGN]
+max-args=7
+max-locals=25
+max-returns=8
+max-branches=12
+max-statements=50
+[SIMILARITIES]
+ignore-imports=yes
