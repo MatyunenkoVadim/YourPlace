@@ -32,6 +32,7 @@ if TYPE_CHECKING:
 
 log = logging.getLogger(__name__)
 
+
 class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     """
     Менеджер пользователей, который управляет событиями, связанными с пользователями.

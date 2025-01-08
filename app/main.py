@@ -16,9 +16,7 @@
 """
 
 from contextlib import asynccontextmanager
-from pathlib import Path
 from fastapi import FastAPI, HTTPException, status
-from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
 from starlette.responses import HTMLResponse
