@@ -1,4 +1,4 @@
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from .model import Model
 
@@ -12,6 +12,7 @@ from .mixins.id_int_pk import IdIntPkMixin
 
 if TYPE_CHECKING:
     from sqlalchemy.ext.asyncio import AsyncSession
+    from .visitors import Visitor
 
 
 class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
@@ -19,6 +20,8 @@ class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
 
     phone: Mapped[str | None] = mapped_column(unique=True)
     fullname: Mapped[str | None]
+
+    visitor: Mapped[list["Visitor"]] = relationship(back_populates="user")
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
