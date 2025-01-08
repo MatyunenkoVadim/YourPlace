@@ -4,6 +4,10 @@ import Header from "../components/Header.jsx";
 import CalendarModal from "../components/CalendarModal.jsx";
 import TimeModal from "../components/TimeModal.jsx";
 import GuestsModal from "../components/GuestsModal.jsx";
+import Frame from "../images/frame.svg";
+import Calendar from "../images/calendar.svg";
+import Clock from "../images/clock.svg";
+import Guest from "../images/guest.svg";
 
 const getGuestLabel = (count) => {
   if (count === 1) return "гость";
