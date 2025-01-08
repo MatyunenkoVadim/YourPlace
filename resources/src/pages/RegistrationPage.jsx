@@ -34,7 +34,7 @@ const RegistrationPage = () => {
               },
           });
           setToken(responseLog.data.access_token);
-          navigate("/api/v1/users/me");
+          navigate("/users/me");
       }
     } catch (err) {
       if (err.response && err.response.data.detail) {

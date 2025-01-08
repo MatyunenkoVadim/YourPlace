@@ -1,7 +1,7 @@
 from contextlib import asynccontextmanager
 from pathlib import Path
 
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, status
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
 from starlette.requests import Request
@@ -46,16 +46,27 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
+app.include_router(router_reservation)
+
+react_routes = [
+    "/reservation",
+    "/table_selection",
+    "/result",
+    "/users/login",
+    "/users/register",
+    "/users/me",
+]
 
 @app.get("/", response_class=HTMLResponse)
 async def read_index(request: Request):
     return templates.TemplateResponse("index.html", {"request": request})
 
-
-@app.get("/{full_path:path}")
-async def serve_react_app(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
-
-app.include_router(router=router_api_vi, prefix=settings.api_v1_prefix)
-app.include_router(router_reservation)
+@app.get("/{path:path}")
+async def serve_react_app(request: Request, path: str):
+    if f"/{path}" in react_routes:
+        return templates.TemplateResponse("index.html", {"request": request})
+    raise HTTPException(
+        status_code=status.HTTP_404_NOT_FOUND,
+        detail="Not Found",
+    )

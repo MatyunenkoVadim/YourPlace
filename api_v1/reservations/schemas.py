@@ -5,8 +5,8 @@ from pydantic import BaseModel, ConfigDict
 
 class ReservationCreate(BaseModel):
     guest_count: int
-    reservation_date: datetime
-    table_number: str
+    reservation_date: str
+    table_number: int
 
 
 class ReservationResponse(ReservationCreate):
