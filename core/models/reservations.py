@@ -16,7 +16,7 @@ class Reservation(Model, IdIntPkMixin):
     __tablename__ = "reservations"
 
     guest_count: Mapped[int]
-    reservation_date: Mapped[datetime]
+    reservation_date: Mapped[str]
 
     table_number: Mapped[int] = mapped_column(
         ForeignKey("tables.id"),
