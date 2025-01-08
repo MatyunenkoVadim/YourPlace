@@ -1,9 +1,22 @@
+"""
+Этот модуль определяет модель User, которая представляет пользователя в системе.
+
+Классы:
+- User: Модель, представляющая пользователя, включая телефон и полное имя.
+
+Зависимости:
+- Использует SQLAlchemy для определения моделей и отношений.
+- Использует FastAPI Users для интеграции с базой данных пользователей.
+- Использует типы из typing для проверки типов во время разработки.
+
+Контекст:
+Этот файл является частью системы управления пользователями и используется для
+хранения и управления данными о пользователях в базе данных.
+"""
+
 from sqlalchemy.orm import Mapped, mapped_column
-
 from .model import Model
-
 from typing import TYPE_CHECKING
-
 from fastapi_users_db_sqlalchemy import (
     SQLAlchemyBaseUserTable,
     SQLAlchemyUserDatabase,
@@ -15,6 +28,14 @@ if TYPE_CHECKING:
 
 
 class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
+    """
+    Модель, представляющая пользователя в системе.
+
+    Атрибуты:
+    - phone: Номер телефона пользователя, уникальный для каждого пользователя.
+    - fullname: Полное имя пользователя.
+    """
+
     __tablename__ = "users"
 
     phone: Mapped[str | None] = mapped_column(unique=True)
@@ -22,4 +43,13 @@ class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
 
     @classmethod
     def get_db(cls, session: "AsyncSession"):
+        """
+        Возвращает объект SQLAlchemyUserDatabase для взаимодействия с базой данных пользователей.
+
+        Параметры:
+        - session: Асинхронная сессия SQLAlchemy.
+
+        Возвращает:
+        - Объект SQLAlchemyUserDatabase, связанный с моделью пользователя.
+        """
         return SQLAlchemyUserDatabase(session, cls)
