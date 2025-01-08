@@ -108,6 +108,17 @@ dev = ["cogapp", "pre-commit", "pytest", "wheel"]
 tests = ["pytest"]
 
 [[package]]
+name = "async-timeout"
+version = "5.0.1"
+description = "Timeout context manager for asyncio programs"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "async_timeout-5.0.1-py3-none-any.whl", hash = "sha256:39e3809566ff85354557ec2398b55e096c8364bacac9405a7a1fa429e77fe76c"},
+    {file = "async_timeout-5.0.1.tar.gz", hash = "sha256:d9321a7a3d5a6a5e187e824d2fa0793ce379a202935782d555d6e9d2735677d3"},
+]
+
+[[package]]
 name = "asyncpg"
 version = "0.30.0"
 description = "An asyncio PostgreSQL driver"
@@ -171,6 +182,24 @@ gssauth = ["gssapi", "sspilib"]
 test = ["distro (>=1.9.0,<1.10.0)", "flake8 (>=6.1,<7.0)", "flake8-pyi (>=24.1.0,<24.2.0)", "gssapi", "k5test", "mypy (>=1.8.0,<1.9.0)", "sspilib", "uvloop (>=0.15.3)"]
 
 [[package]]
+name = "authentication"
+version = "1.1.0"
+description = "Learning authentication"
+optional = false
+python-versions = "*"
+files = [
+    {file = "authentication-1.1.0-py3-none-any.whl", hash = "sha256:41edaacff46fd4de198265d99601da731790a0e22d9706d10b5b9a406cf36375"},
+    {file = "authentication-1.1.0.tar.gz", hash = "sha256:6c9e140de224f365f7152a993b0a0977605ff8765c1d74ac855aa132ef57d85a"},
+]
+
+[package.dependencies]
+Flask = ">=1.0"
+passlib = "*"
+pycryptodome = "*"
+redis = "*"
+wtforms = "*"
+
+[[package]]
 name = "bcrypt"
 version = "4.2.0"
 description = "Modern password hashing for your software and your servers"
@@ -209,6 +238,17 @@ files = [
 [package.extras]
 tests = ["pytest (>=3.2.1,!=3.3.0)"]
 typecheck = ["mypy"]
+
+[[package]]
+name = "blinker"
+version = "1.9.0"
+description = "Fast, simple object-to-object and broadcast signaling"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "blinker-1.9.0-py3-none-any.whl", hash = "sha256:ba0efaa9080b619ff2f3459d1d500c57bddea4a6b424b60a91141db6fd2f08bc"},
+    {file = "blinker-1.9.0.tar.gz", hash = "sha256:b4ce2265a7abece45e7cc896e98dbebe6cead56bcf805a3d23136d145f5445bf"},
+]
 
 [[package]]
 name = "cffi"
@@ -460,6 +500,28 @@ fastapi-users = ">=10.0.0"
 sqlalchemy = {version = ">=2.0.0,<2.1.0", extras = ["asyncio"]}
 
 [[package]]
+name = "flask"
+version = "3.1.0"
+description = "A simple framework for building complex web applications."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "flask-3.1.0-py3-none-any.whl", hash = "sha256:d667207822eb83f1c4b50949b1623c8fc8d51f2341d65f72e1a1815397551136"},
+    {file = "flask-3.1.0.tar.gz", hash = "sha256:5f873c5184c897c8d9d1b05df1e3d01b14910ce69607a117bd3277098a5836ac"},
+]
+
+[package.dependencies]
+blinker = ">=1.9"
+click = ">=8.1.3"
+itsdangerous = ">=2.2"
+Jinja2 = ">=3.1.2"
+Werkzeug = ">=3.1"
+
+[package.extras]
+async = ["asgiref (>=3.2)"]
+dotenv = ["python-dotenv"]
+
+[[package]]
 name = "greenlet"
 version = "3.1.1"
 description = "Lightweight in-process concurrent programming"
@@ -626,6 +688,17 @@ files = [
 all = ["flake8 (>=7.1.1)", "mypy (>=1.11.2)", "pytest (>=8.3.2)", "ruff (>=0.6.2)"]
 
 [[package]]
+name = "itsdangerous"
+version = "2.2.0"
+description = "Safely pass data to untrusted environments and back."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "itsdangerous-2.2.0-py3-none-any.whl", hash = "sha256:c6242fc49e35958c8b15141343aa660db5fc54d4f13a1db01a3f5891b98700ef"},
+    {file = "itsdangerous-2.2.0.tar.gz", hash = "sha256:e0050c0b7da1eea53ffaf149c0cfbb5c6e2e2b69c4bef22c81fa6eb73e5f6173"},
+]
+
+[[package]]
 name = "jinja2"
 version = "3.1.4"
 description = "A very fast and expressive template engine."
@@ -743,6 +816,23 @@ files = [
 ]
 
 [[package]]
+name = "passlib"
+version = "1.7.4"
+description = "comprehensive password hashing framework supporting over 30 schemes"
+optional = false
+python-versions = "*"
+files = [
+    {file = "passlib-1.7.4-py2.py3-none-any.whl", hash = "sha256:aa6bca462b8d8bda89c70b382f0c298a20b5560af6cbfa2dce410c0a2fb669f1"},
+    {file = "passlib-1.7.4.tar.gz", hash = "sha256:defd50f72b65c5402ab2c573830a6978e5f202ad0d984793c8dde2c4152ebe04"},
+]
+
+[package.extras]
+argon2 = ["argon2-cffi (>=18.2.0)"]
+bcrypt = ["bcrypt (>=3.1.0)"]
+build-docs = ["cloud-sptheme (>=1.10.1)", "sphinx (>=1.6)", "sphinxcontrib-fulltoc (>=1.2.0)"]
+totp = ["cryptography"]
+
+[[package]]
 name = "pwdlib"
 version = "0.2.1"
 description = "Modern password hashing for Python"
@@ -770,6 +860,47 @@ python-versions = ">=3.8"
 files = [
     {file = "pycparser-2.22-py3-none-any.whl", hash = "sha256:c3702b6d3dd8c7abc1afa565d7e63d53a1d0bd86cdc24edd75470f4de499cfcc"},
     {file = "pycparser-2.22.tar.gz", hash = "sha256:491c8be9c040f5390f5bf44a5b07752bd07f56edf992381b05c701439eec10f6"},
+]
+
+[[package]]
+name = "pycryptodome"
+version = "3.21.0"
+description = "Cryptographic library for Python"
+optional = false
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,>=2.7"
+files = [
+    {file = "pycryptodome-3.21.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:dad9bf36eda068e89059d1f07408e397856be9511d7113ea4b586642a429a4fd"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-manylinux2010_i686.whl", hash = "sha256:a1752eca64c60852f38bb29e2c86fca30d7672c024128ef5d70cc15868fa10f4"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:3ba4cc304eac4d4d458f508d4955a88ba25026890e8abff9b60404f76a62c55e"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:7cb087b8612c8a1a14cf37dd754685be9a8d9869bed2ffaaceb04850a8aeef7e"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-musllinux_1_1_aarch64.whl", hash = "sha256:26412b21df30b2861424a6c6d5b1d8ca8107612a4cfa4d0183e71c5d200fb34a"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-win32.whl", hash = "sha256:cc2269ab4bce40b027b49663d61d816903a4bd90ad88cb99ed561aadb3888dd3"},
+    {file = "pycryptodome-3.21.0-cp27-cp27m-win_amd64.whl", hash = "sha256:0fa0a05a6a697ccbf2a12cec3d6d2650b50881899b845fac6e87416f8cb7e87d"},
+    {file = "pycryptodome-3.21.0-cp27-cp27mu-manylinux2010_i686.whl", hash = "sha256:6cce52e196a5f1d6797ff7946cdff2038d3b5f0aba4a43cb6bf46b575fd1b5bb"},
+    {file = "pycryptodome-3.21.0-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:a915597ffccabe902e7090e199a7bf7a381c5506a747d5e9d27ba55197a2c568"},
+    {file = "pycryptodome-3.21.0-cp27-cp27mu-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:a4e74c522d630766b03a836c15bff77cb657c5fdf098abf8b1ada2aebc7d0819"},
+    {file = "pycryptodome-3.21.0-cp27-cp27mu-musllinux_1_1_aarch64.whl", hash = "sha256:a3804675283f4764a02db05f5191eb8fec2bb6ca34d466167fc78a5f05bbe6b3"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-macosx_10_9_universal2.whl", hash = "sha256:2480ec2c72438430da9f601ebc12c518c093c13111a5c1644c82cdfc2e50b1e4"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-macosx_10_9_x86_64.whl", hash = "sha256:de18954104667f565e2fbb4783b56667f30fb49c4d79b346f52a29cb198d5b6b"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:2de4b7263a33947ff440412339cb72b28a5a4c769b5c1ca19e33dd6cd1dcec6e"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:0714206d467fc911042d01ea3a1847c847bc10884cf674c82e12915cfe1649f8"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:7d85c1b613121ed3dbaa5a97369b3b757909531a959d229406a75b912dd51dd1"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-musllinux_1_1_aarch64.whl", hash = "sha256:8898a66425a57bcf15e25fc19c12490b87bd939800f39a03ea2de2aea5e3611a"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-musllinux_1_2_i686.whl", hash = "sha256:932c905b71a56474bff8a9c014030bc3c882cee696b448af920399f730a650c2"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-musllinux_1_2_x86_64.whl", hash = "sha256:18caa8cfbc676eaaf28613637a89980ad2fd96e00c564135bf90bc3f0b34dd93"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-win32.whl", hash = "sha256:280b67d20e33bb63171d55b1067f61fbd932e0b1ad976b3a184303a3dad22764"},
+    {file = "pycryptodome-3.21.0-cp36-abi3-win_amd64.whl", hash = "sha256:b7aa25fc0baa5b1d95b7633af4f5f1838467f1815442b22487426f94e0d66c53"},
+    {file = "pycryptodome-3.21.0-pp27-pypy_73-manylinux2010_x86_64.whl", hash = "sha256:2cb635b67011bc147c257e61ce864879ffe6d03342dc74b6045059dfbdedafca"},
+    {file = "pycryptodome-3.21.0-pp27-pypy_73-win32.whl", hash = "sha256:4c26a2f0dc15f81ea3afa3b0c87b87e501f235d332b7f27e2225ecb80c0b1cdd"},
+    {file = "pycryptodome-3.21.0-pp310-pypy310_pp73-macosx_10_15_x86_64.whl", hash = "sha256:d5ebe0763c982f069d3877832254f64974139f4f9655058452603ff559c482e8"},
+    {file = "pycryptodome-3.21.0-pp310-pypy310_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:7ee86cbde706be13f2dec5a42b52b1c1d1cbb90c8e405c68d0755134735c8dc6"},
+    {file = "pycryptodome-3.21.0-pp310-pypy310_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:0fd54003ec3ce4e0f16c484a10bc5d8b9bd77fa662a12b85779a2d2d85d67ee0"},
+    {file = "pycryptodome-3.21.0-pp310-pypy310_pp73-win_amd64.whl", hash = "sha256:5dfafca172933506773482b0e18f0cd766fd3920bd03ec85a283df90d8a17bc6"},
+    {file = "pycryptodome-3.21.0-pp39-pypy39_pp73-macosx_10_15_x86_64.whl", hash = "sha256:590ef0898a4b0a15485b05210b4a1c9de8806d3ad3d47f74ab1dc07c67a6827f"},
+    {file = "pycryptodome-3.21.0-pp39-pypy39_pp73-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:f35e442630bc4bc2e1878482d6f59ea22e280d7121d7adeaedba58c23ab6386b"},
+    {file = "pycryptodome-3.21.0-pp39-pypy39_pp73-manylinux_2_5_i686.manylinux1_i686.manylinux_2_17_i686.manylinux2014_i686.whl", hash = "sha256:ff99f952db3db2fbe98a0b355175f93ec334ba3d01bbde25ad3a5a33abc02b58"},
+    {file = "pycryptodome-3.21.0-pp39-pypy39_pp73-win_amd64.whl", hash = "sha256:8acd7d34af70ee63f9a849f957558e49a98f8f1634f86a59d2be62bb8e93f71c"},
+    {file = "pycryptodome-3.21.0.tar.gz", hash = "sha256:f7787e0d469bdae763b876174cf2e6c0f7be79808af26b1da96f1a64bcf47297"},
 ]
 
 [[package]]
@@ -1022,6 +1153,24 @@ files = [
     {file = "PyYAML-6.0.2-cp39-cp39-win_amd64.whl", hash = "sha256:39693e1f8320ae4f43943590b49779ffb98acb81f788220ea932a6b6c51004d8"},
     {file = "pyyaml-6.0.2.tar.gz", hash = "sha256:d584d9ec91ad65861cc08d42e834324ef890a082e591037abe114850ff7bbc3e"},
 ]
+
+[[package]]
+name = "redis"
+version = "5.2.1"
+description = "Python client for Redis database and key-value store"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "redis-5.2.1-py3-none-any.whl", hash = "sha256:ee7e1056b9aea0f04c6c2ed59452947f34c4940ee025f5dd83e6a6418b6989e4"},
+    {file = "redis-5.2.1.tar.gz", hash = "sha256:16f2e22dff21d5125e8481515e386711a34cbec50f0e44413dd7d9c060a54e0f"},
+]
+
+[package.dependencies]
+async-timeout = {version = ">=4.0.3", markers = "python_full_version < \"3.11.3\""}
+
+[package.extras]
+hiredis = ["hiredis (>=3.0.0)"]
+ocsp = ["cryptography (>=36.0.1)", "pyopenssl (==23.2.1)", "requests (>=2.31.0)"]
 
 [[package]]
 name = "sniffio"
@@ -1406,7 +1555,41 @@ files = [
     {file = "websockets-14.1.tar.gz", hash = "sha256:398b10c77d471c0aab20a845e7a60076b6390bfdaac7a6d2edb0d2c59d75e8d8"},
 ]
 
+[[package]]
+name = "werkzeug"
+version = "3.1.3"
+description = "The comprehensive WSGI web application library."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "werkzeug-3.1.3-py3-none-any.whl", hash = "sha256:54b78bf3716d19a65be4fceccc0d1d7b89e608834989dfae50ea87564639213e"},
+    {file = "werkzeug-3.1.3.tar.gz", hash = "sha256:60723ce945c19328679790e3282cc758aa4a6040e4bb330f53d30fa546d44746"},
+]
+
+[package.dependencies]
+MarkupSafe = ">=2.1.1"
+
+[package.extras]
+watchdog = ["watchdog (>=2.3)"]
+
+[[package]]
+name = "wtforms"
+version = "3.2.1"
+description = "Form validation and rendering for Python web development."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "wtforms-3.2.1-py3-none-any.whl", hash = "sha256:583bad77ba1dd7286463f21e11aa3043ca4869d03575921d1a1698d0715e0fd4"},
+    {file = "wtforms-3.2.1.tar.gz", hash = "sha256:df3e6b70f3192e92623128123ec8dca3067df9cfadd43d59681e210cfb8d4682"},
+]
+
+[package.dependencies]
+markupsafe = "*"
+
+[package.extras]
+email = ["email-validator"]
+
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "70ebbe86e4ec7d33219885819e03b6dcb8d5b5978159ed7ca4263725577d2e35"
+content-hash = "2214f204bb2392ed039ee85c889563c3832528f9f3814e0f3a98ae57d38683ff"

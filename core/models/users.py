@@ -35,8 +35,8 @@ class User(Model, IdIntPkMixin, SQLAlchemyBaseUserTable[int]):
     Атрибуты:
     - phone: Номер телефона пользователя, уникальный для каждого пользователя.
     - fullname: Полное имя пользователя.
-    - is_admin: Наличие прав администратора
-    - visitor:
+    - is_admin: Наличие прав администратора.
+    - visitor: Связь с Посетителями.
     """
 
     __tablename__ = "users"

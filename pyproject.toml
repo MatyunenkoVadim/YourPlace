@@ -19,6 +19,7 @@ pydantic-settings = "^2.6.1"
 python-multipart = "^0.0.17"
 asyncpg = "^0.30.0"
 fastapi-users = {extras = ["sqlalchemy"], version = "^14.0.0"}
+authentication = "^1.1.0"
 
 
 [build-system]
