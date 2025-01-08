@@ -1,5 +1,18 @@
-from fastapi_users.authentication import BearerTransport
+"""
+Этот модуль настраивает транспорт для передачи токенов аутентификации с использованием Bearer схемы.
 
+Переменные:
+- bearer_transport: Экземпляр BearerTransport, который определяет URL для получения токена.
+
+Зависимости:
+- Использует FastAPI Users для настройки транспорта аутентификации.
+
+Контекст:
+Этот файл является частью системы аутентификации и используется для конфигурации
+транспорта токенов, который будет применяться при аутентификации пользователей.
+"""
+
+from fastapi_users.authentication import BearerTransport
 
 bearer_transport = BearerTransport(
     tokenUrl="api/v1/auth/login",
