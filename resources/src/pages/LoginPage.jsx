@@ -28,7 +28,7 @@ const LoginPage = () => {
       });
       if (response.data.access_token) {
           setToken(response.data.access_token);
-          navigate("/api/v1/users/me");
+          navigate("/users/me");
       }
     } catch (error) {
       setError("Ошибка входа. Проверьте email или пароль.");
